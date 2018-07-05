@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="ui segment green inverted">
+  <h1>Data Source R&U Dashboard</h1>
+  <div class="meta"><i>Logged in as  {{session.username}}</i></div>
+  <div class="description">
+    A list of Vendors entered in the meta data.
+    Add a new entry, edit an existing entry or delete one.
+  </div>
+</div>
+
+  <h1>List of Data Sources</h1>
+  {% from "includes/_formhelpers.html" import render_field %}
+
+  <table class="ui table very basic">
+    <tr>
+      <th>View PDF</th>
+      <th>Data Source</th>
+      <th>Author</th>
+      <th>Date Requested</th>
+      <th></th>
+    </tr>
+    {% for vendor in vendors %}
+      <tr>
+        <td><a href="vendor/{{vendor.id}}"><i class="ui icon file pdf outline"></i></a></td>
+        <td>{{vendor.create_date}}</td>
+         <td>
+           <div class="form-group">{{ render_field(form.agree, class_="form-control") }}</div>
+        </td>
+
+        <td>
+          <form action="{{url_for('delete_vendor', id=vendor.id)}}" method="post">
+            <input type="hidden" name="_method" value="GRANT">
+            <input type="checkbox" tabindex="0" class="hidden"><label>I confirm</label>
+          </form>
+        <td>
+          <form action="{{url_for('delete_vendor', id=vendor.id)}}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Request Access" class="ui button compact green">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+
+  <form method="POST" action="" class="ui mini form">
+    <div class="form-group inline-field">{{ render_field(form.dbshortcode, class_="form-control") }}</div>
+    <div class="form-group">{{ render_field(form.agree, class_="form-control") }}</div>
+    <br>
+    <p><input class="ui button green" type="submit" value="Submit">
+  </form>
+
+{% endblock %}

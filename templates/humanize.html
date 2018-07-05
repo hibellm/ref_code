@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Humanize test</h1>
+</div>
+  <h1>About the App</h1>
+  
+  <div>Date test :{{mjhdt}} <button class="ui button grey compact">{{mjhdt | humanize}}</button></div>
+  <div>Size test :{{mjhsz}} <button class="ui button grey compact">{{mjhsz | size_fmt}}</button></div>
+  
+{% endblock %}
+

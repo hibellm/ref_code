@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Data Sources Read & understands</h1>
+  <!-- <ul class="list-group">
+    {% for vendor in vendors %}
+      <li class="list-group-item">
+        <a href="vendor/{{vendor.id}}">{{vendor.title}}</a>
+      </li>
+    {% endfor %}
+  </ul> -->
+  <table class="ui table very basic">
+    <tr>
+      <th>View R&amp;U</th>
+      <th>ID</th>
+      <th>DataSource Code</th>
+      <th>Access?</th>
+      <th>Author</th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for vendor in vendors %}
+      {% if session.logged_in %}
+      <tr class="">
+      {% else %}
+      <tr class="active">
+      {% endif %}
+        <td><a href="vendor/{{vendor.id}}"><i class="ui icon external"></i></a></td>
+        <td>{{vendor.id}}</td>
+        <td>{{vendor.title}}</td>
+        {% if vendor.id==9 %}
+          <td><i class="ui icon green unlock large"></i></td>
+        {% else %}
+          <td><i class="ui icon red lock large"></i></td>
+        {% endif %}
+        <td>{{vendor.author}}</td>
+        <td>{{vendor.create_date}}</td>
+        <td>
+        </td>
+        <td><a href="edit_vendor/{{vendor.id}}" class="ui button compact pull-right">Edit</a></td>
+        <td>
+          <form action="{{url_for('delete_vendor', id=vendor.id)}}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="ui button compact red">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

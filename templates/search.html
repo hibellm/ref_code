@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Search test</h1>
+</div>
+  <h1>About the App</h1>
+  
+  <div class="ui search" id="search1">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="Search countries...">
+      <i class="search icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+
+  <div class="ui sub header">Category Search</div>
+  <div class="ui category search" id="search2">
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="Search countires...">
+      <i class="search icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Read & Understand for {{vendor.title}}</h1>
+  <small>Written by {{vendor.author}} on {{vendor.create_date}}</small>
+  <!-- <div>
+    {{vendor.body | safe}}
+  </div> -->
+<div class="ui segment">
+<div class="ui form ">
+
+  <form action="{{url_for('assign_vendor', id=vendor.id)}}" method="post">
+  <div class="inline field">
+    <div class="ui checkbox">    
+      <input type="hidden" name="dbshortcode" value="{{vendor.title}}">
+      <input type="checkbox" id="agree" name="agree" tabindex="0" value="1"><label for="agree">I agree to the Terms and Conditions</label>
+    </div>
+      <input class="ui button green" type="submit" value="Submit">
+  </div>
+  </form>
+</div>
+</div>
+  <div class="ui message blue inverted">
+    <div class="field center">
+      <iframe src="{{vendor.pdfcode}}" width="640" height="700" allowfullscreen></iframe>
+    </div>
+</div>
+
+{% endblock %}

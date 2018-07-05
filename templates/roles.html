@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Roles and What they access </h1>
+  <small>Written by  on </small>
+
+  <div class="ui segment">
+
+    <div class="ui form">
+      <div class="field">
+          <label>Role</label>
+          <div class="ui selection dropdown" id="roledd">
+              <input type="hidden" name="selrole">
+              <i class="dropdown icon"></i>
+              <div class="default text">All roles</div>
+              <div class="menu">
+  {% for roledd in rolesdd %}
+                  <div class="item" data-value="{{roledd.roleaccessid}}">{{roledd.RoleName}}</div>
+  {% endfor %}
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="ui segment">
+<div class="ui grid">
+    <div class="four wide column">
+      {% for role in roles %}
+        {% if role.rolename %}
+        <div class="ui list">
+                <div class="item">
+                  <i class="folder icon"></i>
+                  <div class="content">
+                    <div class="header">src</div>
+                    <div class="description">Source files for project</div>
+                    <div class="list">
+                      <div class="item">
+                        <i class="folder icon"></i>
+                        <div class="content">
+                          <div class="header">site</div>
+                          <div class="description">Your site's theme</div>
+                        </div>
+                      </div>
+                      <div class="item">
+                        <i class="folder icon"></i>
+                        <div class="content">
+                          <div class="header">themes</div>
+                          <div class="description">Packaged theme files</div>
+                          <div class="list">
+                            <div class="item">
+                              <i class="folder icon"></i>
+                              <div class="content">
+                                <div class="header">default</div>
+                                <div class="description">Default packaged theme</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <i class="folder icon"></i>
+                              <div class="content">
+                                <div class="header">my_theme</div>
+                                <div class="description">Packaged themes are also available in this folder</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="item">
+                        <i class="file icon"></i>
+                        <div class="content">
+                          <div class="header">theme.config</div>
+                          <div class="description">Config file for setting packaged themes</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="folder icon"></i>
+                  <div class="content">
+                    <div class="header">dist</div>
+                    <div class="description">Compiled CSS and JS files</div>
+                    <div class="list">
+                      <div class="item">
+                        <i class="folder icon"></i>
+                        <div class="content">
+                          <div class="header">components</div>
+                          <div class="description">Individual component CSS and JS</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="file icon"></i>
+                  <div class="content">
+                    <div class="header">semantic.json</div>
+                    <div class="description">Contains build settings for gulp</div>
+                  </div>
+                </div>
+              </div>
+          <div class="ui button blue">{{role.RoleName}}</div>
+        {% else %}
+          <div class="ui button grey">{{role.RoleName}}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="four wide column">
+      {% for role in roles %}
+        {% if role.rolename %}
+          <div class="ui button blue">{{role.Accessto}}</div>
+        {% else %}
+          <div class="ui button grey">{{role.Accessto}}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock %}

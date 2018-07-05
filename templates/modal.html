@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Modal test</h1>
+</div>
+  <h1>About the App</h1>
+  <div class="ui button large blue" onclick="$('.ui.modal').modal('show');">clik on this for modal</div>
+
+  <div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Modal Title
+    </div>
+    <div class="image content">
+      <div class="image">
+        An image can appear on left or an icon
+      </div>
+      <div class="description">
+        A description can appear on the right
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui button" onclick="$('.ui.modal').modal('hide');">Cancel</div>
+      <div class="ui button" onclick="$('.ui.modal').modal('hide');">OK</div>
+    </div>
+  </div>
+
+{% endblock %}

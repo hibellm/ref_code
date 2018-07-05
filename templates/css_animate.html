@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+  </head>
+
+<style>
+/* The animation code */
+/*@keyframes example {
+    0%   {opacity:1;left:0px;top:0px;background-image: url('../static/images/user64.png');}
+    25%  {opacity:0.5;left:256px;top:0px;background-image: url('../static/images/user64.png');}
+    50%  {opacity:0;left:512px;top:0px}
+    75%  {opacity:0.5;left:768px;top:0px;background-image: url('../static/images/secret64.png');}    
+    100% {opacity:1;left:1024px;top:0px;background-image: url('../static/images/secret64.png');}
+}*/
+@keyframes example {
+    0%   {opacity:1;left:0px;top:0px;background-image: url('../static/images/user64.png');}
+    49%  {opacity:0.2;left:512px;top:0px;background-image: url('../static/images/user64.png');}
+    50%  {opacity:0.2;left:513px;top:0px;background-image: url('../static/images/secret64.png');}    
+    100% {opacity:1;left:1024px;top:0px;background-image: url('../static/images/secret64.png');}
+}
+
+
+/* The element to apply the animation to */
+#maindiv {
+    width: 11024x;
+    height: 64px;
+    position: relative;
+    background-color:transparent;
+}
+#slider {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-delay: 2s;    
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+}
+#sliderbox {
+    width: 1024px;
+    height: 64px;
+    z-index: -1;
+    position: absolute;
+    /*overflow: hidden;*/
+}
+
+/*FOR MATRIX*/
+body {
+  background: #fff;
+  margin: 0;
+}
+
+</style>
+  <body>
+ 
+    <div id="maindiv">
+         <div id="sliderbox"><div id="slider"></div></div>
+    </div>         
+  </body>
+</html>
+
+<script>
+//   var canvas = document.body.appendChild( document.createElement( 'canvas' ) ),
+//     context = canvas.getContext( '2d' );
+    var canvas = document.getElementById('sliderbox').appendChild( document.createElement( 'canvas' ) ),
+    context = canvas.getContext( '2d' );
+context.globalCompositeOperation = 'lighter';
+canvas.width = 1024;
+canvas.height = 64;
+draw();
+
+//var textStrip = ['诶', '比', '西', '迪', '伊', '吉', '艾', '杰', '开', '哦', '屁', '提', '维'];
+var textStrip = ['0', '0', '1', '1', '0', '1', '1', '0', '0', '1', '1', '0', '1'];
+
+var stripCount = 60, stripX = new Array(), stripY = new Array(), dY = new Array(), stripFontSize = new Array();
+
+for (var i = 0; i < stripCount; i++) {
+    stripX[i] = Math.floor(Math.random()*1265);
+    stripY[i] = -100;
+    dY[i] = Math.floor(Math.random()*7)+3;
+    stripFontSize[i] = Math.floor(Math.random()*16)+8;
+}
+
+var theColors = ['#cefbe4', '#81ec72', '#5cd646', '#54d13c', '#4ccc32', '#43c728'];
+
+var elem, context, timer;
+
+function drawStrip(x, y) {
+    for (var k = 0; k <= 20; k++) {
+        var randChar = textStrip[Math.floor(Math.random()*textStrip.length)];
+        if (context.fillText) {
+            switch (k) {
+            case 0:
+                context.fillStyle = theColors[0]; break;
+            case 1:
+                context.fillStyle = theColors[1]; break;
+            case 3:
+                context.fillStyle = theColors[2]; break;
+            case 7:
+                context.fillStyle = theColors[3]; break;
+            case 13:
+                context.fillStyle = theColors[4]; break;
+            case 17:
+                context.fillStyle = theColors[5]; break;
+            }
+            context.fillText(randChar, x, y);
+        }
+        y -= stripFontSize[k];
+    }
+}
+
+function draw() {
+    // clear the canvas and set the properties
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.shadowOffsetX = context.shadowOffsetY = 0;
+    context.shadowBlur = 8;
+    context.shadowColor = '#94f475';
+    
+    for (var j = 0; j < stripCount; j++) {
+        context.font = stripFontSize[j]+'px MatrixCode';
+        context.textBaseline = 'top';
+        context.textAlign = 'center';
+        
+        if (stripY[j] > 1358) {
+            stripX[j] = Math.floor(Math.random()*canvas.width);
+            stripY[j] = -100;
+            dY[j] = Math.floor(Math.random()*7)+3;
+            stripFontSize[j] = Math.floor(Math.random()*16)+8;
+            drawStrip(stripX[j], stripY[j]);
+        } else drawStrip(stripX[j], stripY[j]);
+        
+        stripY[j] += dY[j];
+    }
+  setTimeout(draw, 70);
+}
+
+
+</script>

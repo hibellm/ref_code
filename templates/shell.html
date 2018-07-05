@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h1>Welcome To FlaskApp</h1>
+    <p class="lead">This application is built on the Python Flask framework</p>
+    <p class="lead">This will allows the Metadata updates to be ran from the press of a button.</p>
+  <div>
+      
+	
+ <form action="{{ url_for('shell') }}" method="post">	
+ <table class="ui table very basic">
+    <tr>
+      <th>Updated?</th>
+      <th>Metadata</th>
+      <th>Updated</th>
+      <th></th>
+    </tr>	  
+    <tr>
+        <td>Updated!</td>
+        <td>Vendor</td>
+        <td></td>
+        <td><input type="submit" name="runscript" value="runvendor" class="ui button compact blue fluid"></td>
+    </tr>
+    <tr>
+        <td>Updated!</td>
+        <td>Data Source</td>
+        <td></td>
+        <td><input type="submit" name="runscript" value="rundata" class="ui button compact blue fluid"></td>
+    </tr>	
+ </table>	
+ </form> 
+
+ <div class="ui segment">
+  <p><iframe src="listfiles2.txt" frameborder="0" height="400"
+      width="95%"></iframe></p>
+ </div>
+ 
+{% endblock %}
