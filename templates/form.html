@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Form test</h1>
+</div>
+  <h1>About the App</h1>
+  
+  <div class="ui button" id="tagclear">Clear</div>
+
+  <form action="/form" method="POST">
+  
+
+    <div class="ui sub header">Tag entry</div>
+    <div class="ui right labeled left icon input" id="tagname1">
+      <i class="tags icon"></i><input type="text" placeholder="Enter tags" name="tag1" value="tag"><a class="ui tag green label">Add Tag</a>
+    </div>
+    <div class="ui right labeled left icon input" id="tagname2">
+      <i class="tags icon"></i><input type="text" placeholder="Enter tags" name="tag2" value=""><a class="ui tag green label">Add Tag (no default)</a>
+    </div>
+
+  <div class="ui sub header">Single</div>
+  <div class="field">
+    <select name="onesel" class="ui fluid search dropdown"  id="d1clear">
+      <option value="">Skills</option>
+      <option value="angular">Angular</option>
+      <option value="css">CSS</option>
+      <option value="design">Graphic Design</option>
+      <option value="ember">Ember</option>
+      <option value="html">HTML</option>
+      <option value="ia">Information Architecture</option>
+    </select>
+  </div>
+
+  <div class="ui sub header">Multiple</div>
+  <div class="field">
+    <select multiple="" name="multsel" class="ui fluid normal dropdown"  id="d2clear">
+      <option value="angular">Angular</option>
+      <option value="css">CSS</option>
+      <option value="design">Graphic Design</option>
+      <option value="ember">Ember</option>
+      <option value="html">HTML</option>
+      <option value="ia">Information Architecture</option>
+    </select>
+  </div>  
+
+  <div class="ui sub header">Selection</div>
+  <div class="ui field">    
+    <select multiple="" name="max3sel" class="ui fluid normal dropdown"  id="maxtag">
+      <option value="">Skills</option>
+      <option value="angular">Angular</option>
+      <option value="css">CSS</option>
+      <option value="design">Graphic Design</option>
+      <option value="ember">Ember</option>
+      <option value="html">HTML</option>
+      <option value="ia">Information Architecture</option>
+    </select>
+  </div>    
+
+
+    <div class="inline fields"  id="checkbox1">
+      <label for="fruit">Select your favorite fruit:</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+          <label>Apples</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden">
+          <label>Oranges</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden">
+          <label>Pears</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden">
+          <label>Grapefruit</label>
+        </div>
+      </div>
+    </div>
+    <div class="grouped fields" id="checkbox2">
+      <label for="fruit">Select your second favorite fruit:</label>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+          <label>Apples</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden">
+          <label>Oranges</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input type="radio" name="fruit" tabindex="0" class="hidden">
+          <label>Pears</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox"><input type="radio" name="fruit" tabindex="0" class="hidden">
+          <label>Grapefruit</label>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <div>
+    <a href="/form"><input class="ui button grey" type="submit"></a>
+  </div>
+  
+</form>  
+
+{% endblock %}
