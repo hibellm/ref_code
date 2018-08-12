@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>MYSQL test</h1>
+</div>
+  <h1>About the App</h1>
+  
+<div class="ui segment">
+  <div class="ui grid">
+      <div class="ten wide column">
+
+        <table class="ui table simple celled">
+          <thead>
+              <td>Program</td>
+              <td>Status</td>
+              <td>Last Ran</td>
+          </thead>
+          {% for event in events %}
+          <tr>
+            <td>{{event.EventType}}</td>
+            {% if event.EventStatus=="Success" %}
+              <td><div class="ui label green">{{event.EventStatus}}</div></td>
+            {% else %}  
+            <td><div class="ui label red">{{event.EventStatus}}</div></td>
+            {% endif %}
+            <td>{{event.EventStart}}</td>
+          </tr>
+        {% endfor %}
+        </table>        
+      </div>
+  </div>
+
+{% endblock %}

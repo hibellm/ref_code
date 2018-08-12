@@ -36,7 +36,24 @@ def form():
         print('Multiple select is :'+str(name4))        
         for items in name4:
             print('Multiple select item is :'+(items))
-        
+
+        name5=request.values.get("fruit")
+        print('Fruit is :'+str(name5))        
+        name6=request.values.get("fruit2") 
+        print('Fruit 2 is :'+str(name6))  #you get 'on' if you dont have a values in teh html part      
+
+        name7=request.values.get("cbox")
+        print('CheckBox is :'+str(name7))        
+        name8=request.values.get("slider") 
+        print('Slider is :'+str(name8))
+        name9=request.values.get("tog") 
+        print('Toggle is :'+str(name9))
+
+        name10=request.values.get("slideval") 
+        print('SliderRange is :'+str(name10))
+
+        name11=request.values.get("throughput") 
+        print('Throughput is :'+str(name11))
 
     return render_template('form.html')
 

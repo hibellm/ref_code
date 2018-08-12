@@ -7,10 +7,14 @@
   <h1>About the App</h1>
   
   <div class="ui button" id="tagclear">Clear</div>
+  <a href="/form"><div class="ui red button">2</div></a>   
+
 
   <form action="/form" method="POST">
-  
-
+    <div>
+   
+      <a href="/form"><input class="ui button grey" type="submit"></a>
+    </div>
     <div class="ui sub header">Tag entry</div>
     <div class="ui right labeled left icon input" id="tagname1">
       <i class="tags icon"></i><input type="text" placeholder="Enter tags" name="tag1" value="tag"><a class="ui tag green label">Add Tag</a>
@@ -20,7 +24,7 @@
     </div>
 
   <div class="ui sub header">Single</div>
-  <div class="field">
+  <div class="field required"> 
     <select name="onesel" class="ui fluid search dropdown"  id="d1clear">
       <option value="">Skills</option>
       <option value="angular">Angular</option>
@@ -57,66 +61,74 @@
     </select>
   </div>    
 
-
+  <div class="ui form">
     <div class="inline fields"  id="checkbox1">
       <label for="fruit">Select your favorite fruit:</label>
       <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
-          <label>Apples</label>
-        </div>
+        <div class="ui radio checkbox"><input type="radio" name="fruit" value="Apples" checked="" tabindex="0" class="hidden"><label>Apples</label></div>
       </div>
       <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" tabindex="0" class="hidden">
-          <label>Oranges</label>
-        </div>
+        <div class="ui radio checkbox"><input type="radio" name="fruit" value="Oranges"  tabindex="1" class="hidden"><label>Oranges</label></div>
       </div>
       <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" tabindex="0" class="hidden">
-          <label>Pears</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" tabindex="0" class="hidden">
-          <label>Grapefruit</label>
-        </div>
+        <div class="ui radio checkbox"><input type="radio" name="fruit" value="Pears"  tabindex="2" class="hidden"><label>Pears</label></div>
       </div>
     </div>
     <div class="grouped fields" id="checkbox2">
       <label for="fruit">Select your second favorite fruit:</label>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
-          <label>Apples</label>
-        </div>
+       <div class="field">
+        <div class="ui radio checkbox"><input type="radio" name="fruit2" value="Apples2" checked="" tabindex="0" class="hidden"><label>Apples</label></div>
       </div>
       <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" tabindex="0" class="hidden">
-          <label>Oranges</label>
-        </div>
+        <div class="ui radio checkbox"><input type="radio" name="fruit2" value="Oranges2" tabindex="1" class="hidden"><label>Oranges</label></div>
       </div>
       <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="fruit" tabindex="0" class="hidden">
-          <label>Pears</label>
-        </div>
+        <div class="ui radio checkbox"><input type="radio" name="fruit2" value="Pears2" tabindex="2" class="hidden"><label>Pears</label></div>
       </div>
-      <div class="field">
-        <div class="ui radio checkbox"><input type="radio" name="fruit" tabindex="0" class="hidden">
-          <label>Grapefruit</label>
+    </div>
+  </div>
+
+  <div class="ui form">
+    <div class="inline field">
+      <div class="ui checkbox" id="cb"><input type="checkbox" name="cbox" tabindex="0" class="hidden"><label>Checkbox</label></div>
+    </div>
+    <div class="inline field">
+      <div class="ui slider checkbox" id="sl"><input type="checkbox" name="slider" tabindex="0" class="hidden"><label>Slider</label></div>
+      <label></label>
+    </div>
+    <div class="inline field">
+      <div class="ui toggle checkbox" id="tg"><input type="checkbox" name="tog" tabindex="0" class="hidden"><label>Toggle</label></div>
+    </div>
+  </div>
+
+  <div class="ui form">
+      <div class="inline grouped fields">
+        <label>Outbound Throughput</label>
+        <div class="field">
+          <div class="ui slider checkbox"><input type="radio" name="throughput" checked="checked" value="20"><label>20 mbps max</label></div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox"><input type="radio" name="throughput" value="10"><label>10mbps max</label></div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox"><input type="radio" name="throughput" value="5"><label>5mbps max</label></div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox checked" value="0"><input type="radio" name="throughput"><label>Unmetered</label></div>
         </div>
       </div>
     </div>
 
+    <div class="ui star rating" id="star" data-rating="3"></div>
 
 
+  <div class="ui segment">
+    <div class="ui teal statistic">
+      <div class="value"><span id="slider_value"></span></div>
+      <div class="label">Increase my database by (MB)</div>
+    </div>
+    <input class="myslider" id="dbslider" type="range" name="slideval" min="1" max="100" value="50" >   
 
-  <div>
-    <a href="/form"><input class="ui button grey" type="submit"></a>
   </div>
   
 </form>  

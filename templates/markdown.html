@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Markdown test</h1>
+</div>
+  <h1>About the App</h1>
+  
+  
+  <div class="ui segment red inverted">
+  <zero-md file="https://raw.githubusercontent.com/hibellm/Web-testing/master/README.md">
+    <!-- Remember to pass in empty container of class="md-html". -->
+    <div class="md-html"></div>
+  </zero-md>
+</div>
+
+<div class="ui segment blue inverted">  
+  <zero-md text="H~~ell~~o *W*o**r**l***d***!">
+    <div class="md-html"></div>
+  </zero-md>
+</div>  
+
+<div class="ui segment green inverted">  
+  <zero-md>
+    <div class="md-html"></div>
+    <xmp>
+  # This is my markdown
+  
+  H~~ell~~o *W*o**r**l***d***!
+    </xmp>
+  </zero-md>
+</div>
+
+{% endblock %}

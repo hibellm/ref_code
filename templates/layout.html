@@ -5,6 +5,9 @@
     <title>Ref-code Testing</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+
+    {#<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slider.css') }}"> -->#}
+
   </head>
 
   <body>
@@ -17,6 +20,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.js"></script>
+
+    <!--FOR MARKDOWN-->
+    <link rel="import" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/build/zero-md.html">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/markdown-themes/default.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/highlight-themes/default.css">
+
     <!-- <script src="/tablesort.js"></script> -->
     <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
     <!--script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script-->
@@ -31,6 +40,12 @@
     $(this).closest('.message').fadeOut();
     });
     </script>
+    <script>     
+      var slider = document.getElementById("dbslider");
+      var output = document.getElementById("slider_value");
+      output.innerHTML = slider.value;
+      slider.oninput = function() {output.innerHTML = this.value;}        
+    </script>
     <script>
       $('.menu .item').tab();
       $('.ui.accordion').accordion();
@@ -39,11 +54,14 @@
       $('#d1clear').dropdown();
       $('#d2clear').dropdown({allowAdditions: true});
       $('#maxtag').dropdown({maxSelections: 3});
-      $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');});
+      $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');
+                                              $('#cb, #sl, #tg').checkbox('uncheck');});
 
-      $('#checkbox1, #checkbox2').checkbox();
-
+      $('.ui.radio.checkbox').checkbox();
+      $('#cb, #sl, #tg').checkbox();
       
+          
+
       var content = [
         { title: 'Andorra' },
         { title: 'United Arab Emirates' },
