@@ -7,6 +7,9 @@ from jinja2 import Environment
 # http://jinja.pocoo.org/docs/2.10/extensions/#jinja-extensions
 from jinja2.loaders import FileSystemLoader
 
+
+
+
 app = Flask(__name__)
  
 # assume that your homepage shows the console output.
@@ -43,6 +46,22 @@ def index2():
     env = Environment(loader=FileSystemLoader('templates'))
     tmpl = env.get_template('stdout.html')
     return Response(tmpl.generate(result2=inner2()))            
+
+#hmmm not right
+from io import StringIO
+import sys
+from code2run import code3run
+
+
+@app.route('/yield3')
+def index3():
+    old_stdout = sys.stdout
+    sys.stdout = mystdout = StringIO()
+    code3run()
+    sys.stdout = old_stdout
+
+    return render_template('stdout.html', inner3 = str(mystdout))
+
 
 if __name__ == '__main__':
     app.secret_key='secret123'
