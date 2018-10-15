@@ -13,9 +13,26 @@ from datetime import datetime, date, time
 
 app = Flask(__name__)
 
+icontypes = {'file audio outline': 'm4a,mp3,oga,ogg,webma,wav', 'file archive outline': '7z,zip,rar,gz,tar', 'file image outline': 'gif,ico,jpe,jpeg,jpg,png,svg,webp', 'file pdf outline': 'pdf', 'file video outline': '3g2,3gp,3gp2,3gpp,mov,qt', 'file code outline': 'atom,plist,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml', 'file alternate outline': 'txt', 'film': 'mp4,m4v,ogv,webm', 'globe': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
+
+@app.template_filter('icon_fmt')
+def icon_fmt(filename):
+    i = 'file outline'
+    for icon, exts in icontypes.items():
+        if filename.split('.')[-1] in exts:
+            i = icon
+    return i
+
 
 @app.route('/icons')
-def maiconsrkdown():
+def icons():
+
+    a='abc.html'
+    b='abc.txt'
+    c='abc.zip'
+    x='abc.mp3'
+    y='abc.txt'
+    z='abc.bat'
 
     a=__name__
     b=__file__

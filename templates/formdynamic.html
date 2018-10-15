@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Form test</h1>
+</div>
+  <h1>About the App</h1>
+  
+
+<form action="/formdynamic" method="POST">
+  <div>  
+    <a href="/formdynamic"><input class="ui button grey" type="submit"></a>
+  </div>
+
+
+<div class="ui sub header">Single</div>
+<div class="field required"> 
+  <select name="onesel" class="ui fluid search dropdown"  id="d1clear">
+    <option value="">Skills</option>
+    {% for schema in schemas %}
+    <option value="{{schema.table_schema}}">{{schema.table_schema}}</option>"
+    {% endfor %}
+  </select>
+</div>
+
+<div class="ui sub header">Multiple</div>
+<div class="field">
+  <select multiple="" name="multsel" class="ui fluid normal dropdown"  id="d2clear">
+    <option value="angular">Angular</option>
+    <option value="css">CSS</option>
+    <option value="design">Graphic Design</option>
+    <option value="ember">Ember</option>
+    <option value="html">HTML</option>
+    <option value="ia">Information Architecture</option>
+  </select>
+</div>  
+</form>
+
+
+  {% endblock %}

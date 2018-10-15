@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Ref-code Testing</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">    
 
     {#<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slider.css') }}"> -->#}
 
@@ -19,8 +20,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.js"></script>
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+    
     <!--FOR MARKDOWN-->
     <link rel="import" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/build/zero-md.html">
     <link rel="stylesheet" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/markdown-themes/default.css">
@@ -107,6 +109,58 @@
         { category: 'Africa', title: 'Zimbabwe' },
       ];
       $('#search2').search({type: 'category',source: categoryContent});
+
+      //form validation
+      $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+      $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+      $('#cb1').checkbox();
+      $('#testform')
+        .form({
+          fields: {
+            name     : 'empty',
+            gender   : 'empty',
+            colour   : ['minLength[10]','rgb(255,255,255)'],
+            title    : ['minLength[6]', 'enter a title'],
+            skills   : ['minCount[2]', 'empty'],
+            cb1      : 'checked'
+          },
+          title: {
+            rules: [
+              {
+                type   : 'exactly[cat]',
+                prompt : function(value) {
+                  return 'Minimum of 6 characters';
+                }
+              }
+            ]
+          },
+          field3: {
+            rules: [
+              {
+                type   : 'exactly[cat]',
+                prompt : function(value) {
+                  if(value == 'dog') {return 'I told you to put cat, not dog!';}
+                  return 'That is not cat';
+                }
+              }
+            ]
+          },  
+          fields: {
+            colour: {
+              identifier: 'colour',
+              rules: [{
+                type: 'regExp',
+                value: /rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)/i,
+                prompt : function(value) {
+                  return 'Colour should be in the form  RGB(#,#,#) where # is a value from 0-255';
+                }                
+              }]
+            }
+          }                  
+        });
+        
+
+
    </script>
 
     </body>
