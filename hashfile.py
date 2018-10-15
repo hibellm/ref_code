@@ -15,9 +15,10 @@ def file_as_blockiter(afile, blocksize=65536):
             block = afile.read(blocksize)
 
 
-fnamelst='README.md'
+fnamelst=('README.md','execute.py','stdout.py')
 fname='README.md'
 fdesc='this is a github README file created for delivery 1'
 
-x=[(fname, hash_bytestr_iter(file_as_blockiter(open(fname, 'rb')), hashlib.sha256(),ashexstr=True)),fdesc]
-print(x)
+for fname in fnamelst:
+    x=[(fname, hash_bytestr_iter(file_as_blockiter(open(fname, 'rb')), hashlib.sha256(),ashexstr=True)) ,fdesc ]
+    print(x)
