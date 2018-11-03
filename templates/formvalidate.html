@@ -1,6 +1,18 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">    
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+  <body>
 
-{% from "includes/_formhelpers.html" import render_field %}
+<div class="container">
 
 {% block body %}
 <div class="jumbotron text-center">
@@ -8,38 +20,18 @@
 </div>
   <h1>About the App</h1>
   
-
-
-  <!-- <form action="/formval" method="POST">
-    <div>  
-      <a href="/formval"><input class="ui button grey" type="submit"></a>
-    </div>
-    
-    <div class="form-group">{{ render_field(form.title, class_="form-control") }}</div>
-    <div class="form-group">{{ render_field(form.code, class_="form-control") }}</div>
-    <div class="form-group">{{ render_field(form.agree, class_="form-control") }}</div>    
-
-  </form>   -->
-
-
+  {% include 'includes/_messages.html' %}
   <form class="ui form" action="/formval" method="POST" id="testform">
     <div>  
-      <a href="/formval"><input class="ui button grey" type="submit"></a>
-      <button class="ui button" type="submit">Submit</button>
-      <button class="ui button" type="reset" id="formreset">Reset</button>
-      <button class="ui button" type="clear" id="formclear">Clear</button>
+      <button class="ui button submit green inverted" id="formsubmit">Submit</button>
+      <button class="ui button reset yellow" id="formreset">Reset</button>
+      <button class="ui button clear red" id="formclear">Clear</button>
     </div>
     
-
-    <div class="field">{{ render_field(form.title, class_="form-control") }}</div>
-    <div class="field">{{ render_field(form.code, class_="form-control") }}</div>
-    <div class="field">{{ render_field(form.colour, class_="form-control") }}</div>        
-    <div class="field">{{ render_field(form.agree, class_="form-control") }}</div>   
-    
     <div class="ui sub header">Selection of skills</div>
-    <div class="ui field">    
-      <select multiple="" name="max3sel" class="ui fluid normal dropdown"  id="maxtag">
-        <option value="">Skills</option>
+    <div class="ui field" id="what">    
+      <select multiple="" name="max3sel" class="ui fluid normal dropdown" id="maxtag">
+        <option value=""></option>
         <option value="angular">Angular</option>
         <option value="css">CSS</option>
         <option value="design">Graphic Design</option>
@@ -48,19 +40,70 @@
         <option value="ia">Information Architecture</option>
       </select>
     </div>    
-  
-
 
     <div class="field">
+      <label>Color</label>
+      <input placeholder="Enter RGB color" name="color" type="text" value="rgb(255, 255, 255)">
+    </div>
+
+    <div class="ui field">
       <div class="ui checkbox" id="cb1">
-        <input type="checkbox" tabindex="0" class="hidden" >
+        <input type="checkbox" tabindex="0" class="hidden" name="agree" id="agree">
         <label>I agree to the Terms and Conditions</label>
       </div>
     </div>
-    <div class="ui error message"></div> 
+    
 
   </form> 
 
-
 {% endblock %}
 
+</div>
+
+<script>
+
+  $('#maxtag').dropdown({maxSelections: 3});
+  $('#cb1').checkbox('empty');
+    
+  $('#testform')
+    .form({
+      inline : true,
+      on:'change',
+      fields: {
+        agree: {
+          identifier: 'agree',
+          rules: [
+            { type   : 'checked',
+              prompt : 'Please accept the conditions!'
+            }
+          ]
+        },
+        maxtag : {
+          identifier: 'maxtag',
+          rules: [
+            { type   : 'minCount[1]',
+              prompt : 'Please select at least one skill (max 3)'
+            }
+          ]
+        },
+        color : {
+          identifier: 'color',
+          rules: [
+            { type   : 'regExp',
+              prompt : 'Enter a colour in RGB format eg rgb(255,255,255)',
+              value: /rgb\((\d{1,3}),\s(\d{1,3}),\s(\d{1,3})\)/i
+            }
+          ]
+        }        
+      }
+    });
+
+  //form validation
+  $('#formsubmit').form('submit');// submit
+  $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+  $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+
+</script>
+
+</body>
+</html>

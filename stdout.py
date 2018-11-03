@@ -16,6 +16,8 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     output, errors = exc.execute("help",".")
+    print(output)
+    output.rstrip() + '<br/>\n'
     return render_template('stdout.html', console_gave = [output, errors])
  
 @app.route('/yield')
@@ -46,21 +48,6 @@ def index2():
     env = Environment(loader=FileSystemLoader('templates'))
     tmpl = env.get_template('stdout.html')
     return Response(tmpl.generate(result2=inner2()))            
-
-#hmmm not right
-from io import StringIO
-import sys
-from code2run import code3run
-
-
-@app.route('/yield3')
-def index3():
-    old_stdout = sys.stdout
-    sys.stdout = mystdout = StringIO()
-    code3run()
-    sys.stdout = old_stdout
-
-    return render_template('stdout.html', inner3 = str(mystdout))
 
 
 if __name__ == '__main__':

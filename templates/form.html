@@ -1,25 +1,59 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">    
 
-{% block body %}
-<div class="jumbotron text-center">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script>
+        $(document)
+          .ready(function() {
+            $('#testform')
+              .form({
+                  inline: true,
+                  fields: {
+                          skills: {
+                            identifier: 'maxtag',
+                            rules: [
+                                      {
+                                        type   : 'minCount[2]',
+                                        prompt : 'Please select at least two skills'
+                                      }
+                                    ]
+                          }
+
+    }
+                })
+              });      
+        </script>
+  </head>    
+<body>
+
+
+<div class="ui main container">
+
+<div class="ui segment teal inverted center aligned">
   <h1>Form test</h1>
 </div>
   <h1>About the App</h1>
   
-  <div class="ui button" id="tagclear">Clear</div>
-  <a href="/form"><div class="ui red button">2</div></a>   
+  {% include 'includes/_messages.html' %}
 
-
-  <form action="/form" method="POST">
+<form class="ui form" action="/form" method="POST" id="testform">
     <div>  
-      <a href="/form"><input class="ui button grey" type="submit"></a>
+        <input class="ui button" type="submit" value="Submit" />
+        <!-- <button class="ui button primary" type="submit">Submit</button>
+        <button class="ui button" type="clear">Clear</button> -->
     </div>
     <div class="ui sub header">Tag entry</div>
     <div class="ui right labeled left icon input" id="tagname1">
-      <i class="tags icon"></i><input type="text" placeholder="Enter tags" name="tag1" value="tag"><a class="ui tag green label">Add Tag</a>
+      <i class="ui tags icon"></i><input type="text" placeholder="Enter tags" name="tag1" value="tag"><a class="ui tag green label">Add Tag</a>
     </div>
+    <p></p>
     <div class="ui right labeled left icon input" id="tagname2">
-      <i class="tags icon"></i><input type="text" placeholder="Enter tags" name="tag2" value=""><a class="ui tag green label">Add Tag (no default)</a>
+      <i class="ui tags icon"></i><input type="text" placeholder="Enter tags" name="tag2" value=""><a class="ui tag green label">Add Tag (no default)</a>
     </div>
 
   <div class="ui sub header">Single</div>
@@ -47,7 +81,7 @@
     </select>
   </div>  
 
-  <div class="ui sub header">Selection</div>
+  <div class="ui sub header">Selection (3 Max)</div>
   <div class="ui field">    
     <select multiple="" name="max3sel" class="ui fluid normal dropdown"  id="maxtag">
       <option value="">Skills</option>
@@ -60,48 +94,45 @@
     </select>
   </div>    
 
-  <div class="ui form">
     <div class="inline fields"  id="checkbox1">
       <label for="fruit">Select your favorite fruit:</label>
-      <div class="field">
+      <div class="ui field">
         <div class="ui radio checkbox"><input type="radio" name="fruit" value="Apples" checked="" tabindex="0" class="hidden"><label>Apples</label></div>
       </div>
-      <div class="field">
+      <div class="ui field">
         <div class="ui radio checkbox"><input type="radio" name="fruit" value="Oranges"  tabindex="1" class="hidden"><label>Oranges</label></div>
       </div>
-      <div class="field">
+      <div class="ui field">
         <div class="ui radio checkbox"><input type="radio" name="fruit" value="Pears"  tabindex="2" class="hidden"><label>Pears</label></div>
       </div>
     </div>
     <div class="grouped fields" id="checkbox2">
       <label for="fruit">Select your second favorite fruit:</label>
-       <div class="field">
+       <div class="ui field">
         <div class="ui radio checkbox"><input type="radio" name="fruit2" value="Apples2" checked="" tabindex="0" class="hidden"><label>Apples</label></div>
       </div>
-      <div class="field">
+      <div class="ui field">
         <div class="ui radio checkbox"><input type="radio" name="fruit2" value="Oranges2" tabindex="1" class="hidden"><label>Oranges</label></div>
       </div>
-      <div class="field">
+      <div class="ui field">
         <div class="ui radio checkbox"><input type="radio" name="fruit2" value="Pears2" tabindex="2" class="hidden"><label>Pears</label></div>
       </div>
     </div>
-  </div>
 
-  <div class="ui form">
-    <div class="inline field">
-      <div class="ui checkbox" id="cb"><input type="checkbox" name="cbox" tabindex="0" class="hidden"><label>Checkbox</label></div>
+
+    <div class="ui inline field required">
+      <div class="ui checkbox" id="cb"><input type="checkbox" name="cbox" tabindex="0" class="hidden" id="cb1"><label>Checkbox</label></div>
     </div>
-    <div class="inline field">
-      <div class="ui slider checkbox" id="sl"><input type="checkbox" name="slider" tabindex="0" class="hidden"><label>Slider</label></div>
+    <div class="ui inline field">
+      <div class="ui slider checkbox" id="sl"><input type="checkbox" name="slider" tabindex="0" class="hidden" id="sl1"><label>Slider</label></div>
       <label></label>
     </div>
-    <div class="inline field">
-      <div class="ui toggle checkbox" id="tg"><input type="checkbox" name="tog" tabindex="0" class="hidden"><label>Toggle</label></div>
+    <div class="ui inline field">
+      <div class="ui toggle checkbox" id="tg"><input type="checkbox" name="tog" tabindex="0" class="hidden" id="tg1"><label>Toggle</label></div>
     </div>
-  </div>
 
-  <div class="ui form">
-      <div class="inline grouped fields">
+
+      <div class="ui inline grouped fields">
         <label>Outbound Throughput</label>
         <div class="field">
           <div class="ui slider checkbox"><input type="radio" name="throughput" checked="checked" value="20"><label>20 mbps max</label></div>
@@ -113,22 +144,47 @@
           <div class="ui slider checkbox"><input type="radio" name="throughput" value="5"><label>5mbps max</label></div>
         </div>
         <div class="field">
-          <div class="ui slider checkbox checked" value="0"><input type="radio" name="throughput"><label>Unmetered</label></div>
+          <div class="ui slider checkbox checked"><input type="radio" name="throughput" value="0"><label>Unmetered</label></div>
         </div>
       </div>
-    </div>
-
-    <div class="ui star rating" id="star" data-rating="3"></div>
-
 
   <div class="ui segment">
     <div class="ui teal statistic">
       <div class="value"><span id="slider_value"></span></div>
       <div class="label">Increase my database by (MB)</div>
     </div>
-    <input class="myslider" id="dbslider" type="range" name="slideval" min="1" max="100" value="50" >   
+    <input class="myslider" id="dbslider" type="range" name="slideval" min="1" max="100" value="50">  
   </div>
   
 </form>  
 
-{% endblock %}
+  </div>
+  
+</body>
+
+<script>
+    $('#d1clear').dropdown();
+    $('#d2clear').dropdown({allowAdditions: true});
+    $('#maxtag').dropdown({maxSelections: 3});
+    $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');
+                                            $('#cb, #sl, #tg').checkbox('uncheck');});
+
+    $('.ui.radio.checkbox').checkbox();
+    $('#cb, #sl, #tg').checkbox();
+    
+    $('#s1clear').dropdown({maxselection: 1});          
+
+    //form validation
+
+    $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+    $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+    $('#cb1').checkbox();
+    $('.message .close').on('click', function() {$(this).closest('.message').transition('fade'); });
+ </script>
+<script>     
+    var slider = document.getElementById("dbslider");
+    var output = document.getElementById("slider_value");
+    output.innerHTML = slider.value;
+    slider.oninput = function() {output.innerHTML = this.value;}        
+  </script>
+</html>

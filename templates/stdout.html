@@ -5,6 +5,9 @@
     <title>Ref-code Testing</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>    
   </head>
 
   <body>
@@ -13,31 +16,41 @@
         {% block body %}
         <div class="jumbotron text-center">
             <h1>STDOUT test</h1>
+            <p>Blue is <a href="http://127.0.0.1:5000/">/</a> the output of the Help command to the window</p>
+            <p>Red is <a href="http://127.0.0.1:5000/yield">/yield</a> prints out 1 to 19</p>
+            <p>Green is <a href="http://127.0.0.1:5000/yield2">/yield2</a> prints out a start/numbers/end</p>
         </div> 
    
         <div class="ui segment blue">
             {% for content in console_gave %}
-                {{content}}
+                {{content}}<br>
             {% endfor %}
         </div>
+
         <div class="ui segment red">
             {% for line in result %}
                 {{ line }}
             {% endfor %}
         </div>
         <div class="ui segment green">
+            <div class="ui button grey" id="clearseg">Clear</div>
+            <div id="toclear">
             {% for line2 in result2 %}
                 {{ line2 }}
             {% endfor %}
+            </div>
         </div>
-        <div class="ui segment yellow">
-            {% for line3 in result3 %}
-                {{ line3 }}
-            {% endfor %}
-        </div>        
+     
         {% endblock %}
 
     </div>
-  </body>
+    <script>
+            $( "#clearseg" ).click(function() {
+            $( "#toclear" ).empty();
+            });
+    </script>
+  
+
+ </body> 
 </html>
 

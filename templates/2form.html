@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.js"></script>
+  </head>
+
+  <body>
+     
+    <div class="container">
+
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Form test</h1>
+</div>
+  <h1>About the App</h1>
+
+  <h1>Schema select</h1>
+
+  <form action="/formuserdetails" method="POST">
+    <div>  
+      <a href="/formuserdetails"><input class="ui button grey" type="submit"></a>
+    </div>
+  
+  <div class="ui sub header">Single schema to select</div>
+  <div class="field required"> 
+    <select name="schemasel" class="ui fluid search dropdown"  id="s1clear">
+      <option value="">Skills</option>
+      {% for schema in schemas %} 
+        {% if loop.changed(schema.table_schema) %}
+          <option value="{{schema.table_schema}}">{{schema.table_schema}}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+
+  <h1>Login</h1>
+  <form action="{{ url_for('login') }}" method="post">
+      {{ login_form.username }}
+      {{ login_form.password }}
+  </form>
+
+{% endblock %}
+
+
+<script>
+$('#roledd').dropdown();
+</script>
+
+<script>
+  $('#s1clear','#t1clear').dropdown();
+  $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');
+                                          $('#cb, #sl, #tg').checkbox('uncheck');});
+
+  $('.ui.radio.checkbox').checkbox();
+  $('#cb, #sl, #tg').checkbox();
+  
+  //form validation
+  $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+  $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+  $('#cb1').checkbox();
+  $('#testform')
+    .form({
+      fields: {
+        schemasel  : ['exactCount[1]', 'select one schema'],
+        tablesel   : ['minCount[1]', 'select at least one table'],
+        cb1        : 'checked'}      
+    });   
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Form test</h1>
+</div>
+  <h1>About the App</h1>
+
+<form action="/formuserdetails" method="POST">
+  <div>  
+    <a href="/formuserdetails"><input class="ui button grey" type="submit"></a>
+  </div>
+
+<div class="ui sub header">Single schema to select</div>
+<div class="field required"> 
+  <select name="onesel" class="ui fluid search dropdown"  id="s1clear">
+    <option value="">Skills</option>
+    {% for schema in schemas %} 
+      {% if loop.changed(schema.table_schema) %}
+        <option value="{{schema.table_schema}}">{{schema.table_schema}}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</div>
+
+<div class="ui sub header">Multiple tables to select</div>
+<div class="field">
+  <select multiple="" name="multsel" class="ui fluid normal dropdown"  id="d2clear">
+    {% for schema in schemas %} 
+      {% if schema.table_schema == (schemasel) %}
+        <option value="{{schema.table_name}}">{{schema.table_name}}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</div>
+<div class="ui message error"></div>  
+</form>
+
+{% endblock %}

@@ -1,26 +1,10 @@
-{#% with messages = get_flashed_messages(with_categories=true) %}
+{% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
+
+      <div class="ui message {{category}}">{{message}}<i class="close icon"></i></div>
+    
     {% endfor %}
   {% endif %}
-{% endwith %#}
+{% endwith %}
 
-{% if error %}
-  <div class="ui message red">{{error}}</div>
-{% endif %}
-
-{% if success %}
-  <div class="ui message green">{{success}}</div>
-{% endif %}
-
-{% if msg %}
-  <div class="ui message blue">
-    <i class="close icon"></i>
-    <div class="header">{{msg}}</div>
-  </div>
-{% endif %}
-
-{% if oth %}
-  <div class="ui message green">{{oth}}</div>
-{% endif %}

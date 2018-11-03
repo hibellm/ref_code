@@ -1,4 +1,7 @@
-#REFERENCE DBShortCode
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# #REFERENCE DBShortCode
 
 # TO USE SEMANTIC-UI AND MODAL
 
@@ -15,7 +18,8 @@ app = Flask(__name__)
 
 
 @app.route('/form', methods=['GET','POST'])
-def form():
+def form():       
+    
 
     if request.method == 'POST':
 
@@ -51,10 +55,20 @@ def form():
 
         name10=request.values.get("slideval") 
         print('SliderRange is :'+str(name10))
+        
+        if int(name10) > 49:
+            flash('this is a large value!','green')
+        elif int(name10) > 20 and int(name10) <50:
+            flash('that value looks about right! ','blue')
+        else:
+            flash('very low..why bother?','red')
+           
 
         name11=request.values.get("throughput") 
         print('Throughput is :'+str(name11))
 
+        print(int(name10))
+    
     return render_template('form.html')
 
 if __name__ == '__main__':

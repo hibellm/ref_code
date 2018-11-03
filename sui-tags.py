@@ -14,7 +14,7 @@ from datetime import datetime, date, time
 app = Flask(__name__)
 
 
-@app.route('/tags', methods=['POST'])
+@app.route('/tags', methods=['GET','POST'])
 def tags():
 
     if request.method == 'POST':
