@@ -33,18 +33,23 @@
               <h2>groupby print</h2>
             
               {% for group in jira | groupby('month') %}
-              <table class="ui table celled ">
+              <table class="ui table celled compact fixed striped">
                 <thead>
-                  <tr colspan="2">{{ group.grouper }}</tr>
+                  <tr colspan="2"><div class="ui header small">{{ group.grouper }}</div></tr>
                   <tr><td>col1</td><td>col2</td></tr>
                 </thead>
+                <tbody>
                 {% for mnth in group.list %}
-                  <tr><td>{{ mnth.month }}</td><td>{{loop.index}}</td></tr>
-                {% endfor %}                  
+                  <tr><td>{{ mnth.month }}</td><td><a href="https://en.wikipedia.org/wiki/{{loop.index}}" target="_blank">{{loop.index}}</a></td></tr>
+                {% endfor %}  
+                </tbody>
+                <tfoot class="full-width">
+                    <tr>
+                        <th colspan="2">this is a footer </th>
+                    </tr>
+                  </tfoot>                                
               </table>
               {% endfor %}
-
-
           </div>
       </div>
       <div class="column ">
