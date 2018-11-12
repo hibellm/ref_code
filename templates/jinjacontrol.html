@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Jinja controls test</h1>
+</div>
+  <h1>About the App</h1>
+  
+<div class="ui segment">
+  <div class="ui three column grid">
+      <div class="column ">
+        <div class="ui segment red">
+          <h2>Simple print</h2>
+          {% for j in jira %}
+            <p>{{j.month}}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="column ">
+          <div class="ui segment blue">
+              <h2>frist print</h2>
+              {% for j in jira %}
+              <p>{{j.month}}Loop.index={{loop.index}}
+                {% if loop.first %}Loop.first{% endif %}
+                {% if loop.last %}Loop.last{% endif %}
+                {% if loop.changed %}Loop.changed{% endif %}
+              </p>
+            {% endfor %}
+          </div>
+      </div>
+      <div class="column ">
+          <div class="ui segment yellow">
+              <h2>groupby print</h2>
+            
+              {% for group in jira | groupby('month') %}
+              <table class="ui table celled ">
+                <thead>
+                  <tr colspan="2">{{ group.grouper }}</tr>
+                  <tr><td>col1</td><td>col2</td></tr>
+                </thead>
+                {% for mnth in group.list %}
+                  <tr><td>{{ mnth.month }}</td><td>{{loop.index}}</td></tr>
+                {% endfor %}                  
+              </table>
+              {% endfor %}
+
+
+          </div>
+      </div>
+      <div class="column ">
+          <div class="ui segment green">
+              <h2>groupby print</h2>
+              {% for group in jira | groupby('month') %}
+              <p>
+                  group.grouper={{ group.grouper }}
+                  {% for mnth in group.list %}
+                    {{loop.index}} mnth in group={{ mnth.month }}
+                  {% endfor %}
+              </p>
+            {% endfor %}
+          </div>
+      </div>  
+  
+  </div>
+  
+
+
+{% endblock %}
