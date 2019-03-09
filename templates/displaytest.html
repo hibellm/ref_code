@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Display Testing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">    
+    
+  </head>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#ziptable').DataTable({
+        responsive: true
+      });
+      $('[data-toggle="tooltip"]').tooltip();
+      // $('body').tooltip({selector:'[data-content="tooltip"]'});
+    } );
+  </script>
+
+    <body>
+
+<div class="ui container">
+
+<div class="ui segment teal inverted center aligned placeholder">
+  <h1>Display testing of a data table - using datatables as the main workhorse</h1>
+</div> 
+  <h1>Delivery search Table</h1>
+
+<div class="ui segment teal inverted">
+  <div class="ui grid">
+      <div class="one column">
+
+        <table class="ui sortable celled table" id="ziptable">
+          <thead>
+            <tr>
+              <th>Zipname</th>
+              <th>Description</th>
+              <th>Documents in the Zip</th>           
+            </tr>
+          </thead>
+          <tbody>
+            {% for z in zip|groupby('zipfname') %}
+              
+              <tr>
+                  <td>{{ z.grouper }}</td>
+                  <td>could put some description here</td>                  
+                  <td>                    
+                      <div class="ui styled accordion">
+                          <div class="title"><i class="dropdown icon"></i>
+                            {% for x in z.list %}
+                              {% if loop.changed('doccategory') %}
+
+                              <div class="ui label">ecrf<div class="detail">{{ z.list | selectattr("doccategory", "equalto", "ecrf") | list | count }}</div></div>
+                              <div class="ui label">protocol<div class="detail">{{ z.list | selectattr("doccategory", "equalto", "protocol") | list | count }}</div></div>
+                              <div class="ui label">other_documents<div class="detail">{{ z.list | selectattr("doccategory", "equalto", "other_documents") | list | count }}</div></div>
+                              <div class="ui label">csr<div class="detail">{{ z.list | selectattr("doccategory", "equalto", "csr") | list | count }}</div></div>                              
+                              <div class="ui label">misc<div class="detail">{{ z.list | selectattr("doccategory", "equalto", "misc") | list | count }}</div></div>
+
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                          <div class="content">
+    
+                            <table class="ui celled table">
+                              <thead>
+                                <th>Folder</th>
+                                <th>filename</th>
+                                <th></th>
+                              </thead>
+                              {% for x in z.list %}
+                              <tr>
+                                <td>{{x['doccategory']}}</td>
+                                <td>{{x['docname']}}</td>
+                                <td class="right aligned collapsing tooltip"><i class="ui icon large {{x['docname'] | icon_fmt}}" data-placement="top" 
+                                  {% if x["readme"] %}
+                                    title="{{x['readme']}}"></i></td>
+                                  {% endif %}
+                              </tr>
+                              {% endfor %} 
+                            </table>       
+                    
+                          </div>
+                      </div> 
+                    </td>
+              </tr>        
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+  </div>
+</div>    
+</div>
+
+</body>
+<script>
+    $('.ui.accordion').accordion();
+    $('.ui.icon.large').popup();
+  </script>
+</html>
