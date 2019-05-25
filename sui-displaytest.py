@@ -50,6 +50,15 @@ def jinjacontrol():
         #cur.close()
         pass
     
+def makefile():
+    file = open('testfile.txt','w')  
+    file.write('Hello World') 
+    file.write('This is our new text file') 
+    file.write('and this is another line.') 
+    file.write('Why? Because we can.') 
+    file.close() 
+
+
 
 # FILTERS THAT CAN BE USED
 @app.template_filter('icon_fmt')
