@@ -1,4 +1,4 @@
-import execute as exc
+import executecmd as exc
 import time
 import subprocess
 import os

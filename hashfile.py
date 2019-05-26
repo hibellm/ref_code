@@ -15,7 +15,7 @@ def file_as_blockiter(afile, blocksize=65536):
             block = afile.read(blocksize)
 
 
-fnamelst=('README.md','execute.py','stdout.py')
+fnamelst=('README.md','executecmd.py','stdout.py')
 fname='README.md'
 fdesc='this is a github README file created for delivery 1'
 deliveryId= 1

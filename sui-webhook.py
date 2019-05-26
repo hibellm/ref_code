@@ -15,14 +15,21 @@ from functools import wraps
 from datetime import datetime, date, time
 import requests
 import pickle
+from executecmd import runcode
+import humanize
 
 app = Flask(__name__)
+
+
+@app.template_filter('humanize')
+def time_humanize(timestamp):
+    mdate = datetime.utcfromtimestamp(timestamp)
+    return humanize.naturaltime(mdate)
+
 
 @app.route('/')
 def route():
     return "welcome Marcus"
-
-
 
 @app.route('/github', methods=['GET', 'POST'])
 def github():
@@ -52,10 +59,19 @@ def github():
 def whgithub():
     # LOAD THE WEBHOOK PAYLOAD AND DISPLAY
     y = pickle.load(open("save.gh", "rb"))
-    print(f'y is: {y}')
+    # print(f'y is: {y}')
+
+    #GET SOME VALUES FROM THE PAYLOAD
+    ping=y['hook']['updated_at']
+    pingdt = datetime.strptime(ping, "%Y-%m-%dT%H:%M:%SZ")
+
+
+    x, z = runcode('python sample-python.py', '.')
+
+
 
     # return fromgithub
-    return render_template('webhook.html', y=y)
+    return render_template('webhook.html', x=x, y=y, ping=ping)
 
 
 
