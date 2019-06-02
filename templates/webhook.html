@@ -14,6 +14,28 @@
     <div class="ui image label">{{x}} Pinged at {{ping}}
       <i class="delete icon"></i>
     </div>
+
+
+    <div class="ui feed">
+
+      {% for ping in y %}
+          <div class="event">
+            <div class="label">
+              <img class="small" src="/static/images/fozzie.jpg">
+            </div>
+            <div class="content">
+              <div class="summary">
+                <a class="user">Elliot Fu</a> added you as a friend
+                <div class="date">{{ping|humanize}}</div>
+              </div>
+              <div class="extra text">{{x}}</div>
+              <div class="meta"><a class="like"><i class="like icon"></i> 4 Likes</a></div>
+            </div>
+          </div>
+      {% endfor %}
+
+    </div>
+    <hr>
     {{y}}
   </div>
   <div class="ui segment red">

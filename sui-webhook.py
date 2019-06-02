@@ -12,11 +12,12 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, RadioField,
 from wtforms.validators import DataRequired
 from passlib.hash import sha256_crypt
 from functools import wraps
-from datetime import datetime, date, time
+from datetime import datetime, date, time, timezone
 import requests
 import pickle
 from executecmd import runcode
 import humanize
+
 
 app = Flask(__name__)
 
@@ -36,10 +37,15 @@ def github():
 
     # THE WEBHOOK CONTENT INTO A PICKLE FOR LATER USE
     _jsonres = request.json
-    pickle.dump(_jsonres, open("save.gh", "wb"))
+
 
     if request.headers['X-Github-Event'] == 'ping':
         print(f"This was a {request.headers['X-Github-Event']} event!")
+        #LOAD THE EXISTING JSON THEN ADD THE NEW
+        allpings = pickle.load(open("save.allpings", "rb"))
+        allpings = (allpings, _jsonres)
+        pickle.dump(allpings, open("save.allpings", "wb"))
+
     elif request.headers['X-Github-Event'] == 'push':
         print(f"This was a {request.headers['X-Github-Event']} event!")
     elif request.headers['X-Github-Event'] == 'action':
@@ -58,12 +64,13 @@ def github():
 @app.route('/whgithub', methods=['GET', 'POST'])
 def whgithub():
     # LOAD THE WEBHOOK PAYLOAD AND DISPLAY
-    y = pickle.load(open("save.gh", "rb"))
+    y = pickle.load(open("save.allpings", "rb"))
     # print(f'y is: {y}')
 
+    ping = datetime.now().timestamp() + 2 * 60 * 60
     #GET SOME VALUES FROM THE PAYLOAD
-    ping=y['hook']['updated_at']
-    pingdt = datetime.strptime(ping, "%Y-%m-%dT%H:%M:%SZ")
+    # ping=y['hook']['updated_at']
+    # pingdt = datetime.strptime(ping, "%Y-%m-%dT%H:%M:%SZ")
 
 
     x, z = runcode('python sample-python.py', '.')
