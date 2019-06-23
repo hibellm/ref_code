@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Webhook testing</h1>
+  <p class="lead">This web page tests a scheduler</p>
+  {% if session.logged_in == NULL %}
+    <a href="/register" class="btn btn-primary btn-lg">Register</a>
+    <a href="/login" class="btn btn-success btn-lg">Login</a>
+  {% endif %}
+</div>
+  <h1>Below are the results of the scheduler</h1>
+  <div class="ui segment green">
+    Scheduler/Flask app running?
+    <div class="ui label">
+      {{sensor}}
+    </div>
+    <hr>
+  </div>
+
+{% endblock %}
