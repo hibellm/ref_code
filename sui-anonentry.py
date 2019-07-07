@@ -41,27 +41,29 @@ def anon():
         for items in name4:
             print('Multiple select item is :'+(items))
 
-        name5=request.values.get("fruit")
-        print('Fruit is :'+str(name5))        
-        name6=request.values.get("fruit2") 
-        print('Fruit 2 is :'+str(name6))  #you get 'on' if you dont have a values in teh html part      
+        anontype=request.values.get("anontype")
+        print('AnonType is :'+str(anontype))
+        schema=request.values.get("schema")
+        print('Schema type is :'+str(schema))  #you get 'on' if you dont have a values in teh html part
 
         name7=request.values.get("cbox")
         print('CheckBox is :'+str(name7))        
         name8=request.values.get("slider") 
         print('Slider is :'+str(name8))
-        name9=request.values.get("tog") 
-        print('Toggle is :'+str(name9))
+        withdl=request.values.get("tog1")
+        print('With Data Load? is :'+str(withdl))
+        makedel=request.values.get("tog2")
+        print('Make deliverable is :'+str(makedel))
 
         name10=request.values.get("slideval") 
         print('SliderRange is :'+str(name10))
         
         if int(name10) > 49:
-            flash('this is a large value!<strong> honest</strong>','green')
+            flash('this is a large value!<strong> honest</strong>', 'green')
         elif int(name10) > 20 and int(name10) <50:
-            flash('that value looks about right! ','blue')
+            flash('that value looks about right! ', 'blue')
         else:
-            flash('very low..why bother?','red')
+            flash('very low..why bother?', 'red')
            
 
         name11=request.values.get("throughput") 
@@ -69,10 +71,13 @@ def anon():
 
         print(int(name10))
 
+        print(f'This is my example call\n')
+        print(f"demo_anonymization('{name3a}',{name10},'{schema}','{anontype}',{bool(withdl)},{bool(makedel)})")
+
         return redirect(url_for('anon'))
     
     return render_template('anon.html')
 
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    app.secret_key = 'secret123'
     app.run(debug=True)
