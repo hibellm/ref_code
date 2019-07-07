@@ -11,6 +11,7 @@ from functools import wraps
 from datetime import datetime, date, time
 
 app = Flask(__name__)
+
 # Config MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'

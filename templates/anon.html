@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script>
+        $(document)
+          .ready(function() {
+            $('#testform')
+              .form({
+                  inline: true,
+                  fields: {
+                          skills: {
+                            identifier: 'maxtag',
+                            rules: [
+                                      {
+                                        type   : 'minCount[2]',
+                                        prompt : 'Please select at least two skills'
+                                      }
+                                    ]
+                          }
+
+    }
+                })
+              });      
+        </script>
+  </head>    
+<body>
+
+
+<div class="ui main container">
+
+<div class="ui segment teal inverted center aligned">
+  <h1>Anonymization Form test</h1>
+</div>
+  <h1>About the App</h1>
+  
+  {% include 'includes/_messages.html' %}
+
+<form class="ui form" action="/anon" method="POST" id="testform">
+    <div>  
+        <input class="ui button" type="submit" value="Submit" />
+        <!-- <button class="ui button primary" type="submit">Submit</button>
+        <button class="ui button" type="clear">Clear</button> -->
+    </div>
+    <div class="ui sub header">Jira ticket ID</div>
+    <div class="ui right labeled left icon input" id="tagname1">
+      <i class="ui icon ticket alternate"></i><input type="text" placeholder="Enter ID" name="tag1" value=""><a class="ui tag green label">Add JIRA-ID</a>
+    </div>
+    
+
+  <div class="ui sub header">Select database</div>
+  <div class="field required"> 
+    <select name="onesel" class="ui fluid search dropdown"  id="d1clear">
+      <option value="db1">Database1</option>
+      <option value="db2">Database2</option>
+      <option value="db3">Database3</option>
+    </select>
+  </div>
+
+  <div class="inline fields"  id="checkbox1">
+    <label for="fruit">Anonymization Type:</label>
+    <div class="ui field">
+      <div class="ui radio checkbox"><input type="radio" name="anontype" value="RCR" checked="" tabindex="0" class="hidden"><label>RCR Double coding</label></div>
+    </div>
+    <div class="ui field">
+      <div class="ui radio checkbox"><input type="radio" name="anontype" value="CSDR"  tabindex="1" class="hidden"><label>CSDR</label></div>
+    </div>
+  </div>
+    <div class="inline fields"  id="checkbox1">
+      <label for="fruit">Schema:</label>
+      <div class="ui field">
+        <div class="ui radio checkbox"><input type="radio" name="schema" value="GDM" checked="" tabindex="0" class="hidden"><label>GDM</label></div>
+      </div>
+      <div class="ui field">
+        <div class="ui radio checkbox"><input type="radio" name="schema" value="SDTM"  tabindex="1" class="hidden"><label>SDTM</label></div>
+      </div>
+    </div>
+    <div class="ui inline field">
+      <div class="ui toggle checkbox" id="tg"><input type="checkbox" name="tog1" tabindex="0" class="hidden" id="tg1"><label>No data load?</label></div>
+    </div>
+    <div class="ui inline field">
+      <div class="ui toggle checkbox" id="tg"><input type="checkbox" name="tog2" tabindex="0" class="hidden" id="tg2"><label>No deliverable</label></div>
+    </div>    
+
+
+
+    <div class="ui inline field required">
+      <div class="ui checkbox" id="cb"><input type="checkbox" name="cbox" tabindex="0" class="hidden" id="cb1"><label>Checkbox</label></div>
+    </div>
+    <div class="ui inline field">
+      <div class="ui slider checkbox" id="sl"><input type="checkbox" name="slider" tabindex="0" class="hidden" id="sl1"><label>Slider</label></div>
+      <label></label>
+    </div>
+    <div class="ui inline field">
+      <div class="ui toggle checkbox" id="tg"><input type="checkbox" name="tog" tabindex="0" class="hidden" id="tg1"><label>Toggle</label></div>
+    </div>
+
+
+      <div class="ui inline grouped fields">
+        <label>Outbound Throughput</label>
+        <div class="field">
+          <div class="ui slider checkbox"><input type="radio" name="throughput" checked="checked" value="20"><label>20 mbps max</label></div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox"><input type="radio" name="throughput" value="10"><label>10mbps max</label></div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox"><input type="radio" name="throughput" value="5"><label>5mbps max</label></div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox checked"><input type="radio" name="throughput" value="0"><label>Unmetered</label></div>
+        </div>
+      </div>
+
+  <div class="ui segment">
+    <div class="ui teal statistic">
+      <div class="value"><span id="slider_value"></span></div>
+      <div class="label">Increase my database by (MB)</div>
+    </div>
+    <input class="myslider" id="dbslider" type="range" name="slideval" min="1" max="100" value="50">  
+  </div>
+  
+</form>  
+
+  </div>
+  
+</body>
+
+<script>
+    $('#d1clear').dropdown();
+    $('#d2clear').dropdown({allowAdditions: true});
+    $('#maxtag').dropdown({maxSelections: 3});
+    $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');
+                                            $('#cb, #sl, #tg').checkbox('uncheck');});
+
+    $('.ui.radio.checkbox').checkbox();
+    $('#cb, #sl, #tg').checkbox();
+    
+    $('#s1clear').dropdown({maxselection: 1});          
+
+    //form validation
+
+    $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+    $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+    $('#cb1').checkbox();
+    $('.message .close').on('click', function() {$(this).closest('.message').transition('fade'); });
+ </script>
+<script>     
+    var slider = document.getElementById("dbslider");
+    var output = document.getElementById("slider_value");
+    output.innerHTML = slider.value;
+    slider.oninput = function() {output.innerHTML = this.value;}        
+  </script>
+</html>

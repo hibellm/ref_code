@@ -3,7 +3,7 @@
 
 # #REFERENCE DBShortCode
 
-# TO USE SEMANTIC-UI AND MODAL
+# ANONYMIZATION FORM TO RUN CODE
 
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 #from data import Vendors
@@ -17,8 +17,8 @@ from datetime import datetime, date, time
 app = Flask(__name__)
 
 
-@app.route('/form', methods=['GET','POST'])
-def form():           
+@app.route('/anon', methods=['GET','POST'])
+def anon():           
 
     if request.method == 'POST':
 
@@ -31,7 +31,8 @@ def form():
         print('Single select is :'+str(name2))    
         
         name3a=request.values.get("tag1")
-        print('Text tag is :'+str(name3a))
+        print('Text tag is :'+str(name3a))        
+
         name3b=request.values.get("tag2")
         print('Text tag (no default) is :'+str(name3b))
 
@@ -56,7 +57,7 @@ def form():
         print('SliderRange is :'+str(name10))
         
         if int(name10) > 49:
-            flash('this is a large value!','green')
+            flash('this is a large value!<strong> honest</strong>','green')
         elif int(name10) > 20 and int(name10) <50:
             flash('that value looks about right! ','blue')
         else:
@@ -68,9 +69,9 @@ def form():
 
         print(int(name10))
 
-        return redirect(url_for('form'))
+        return redirect(url_for('anon'))
     
-    return render_template('form.html')
+    return render_template('anon.html')
 
 if __name__ == '__main__':
     app.secret_key='secret123'

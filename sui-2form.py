@@ -2,7 +2,7 @@
 
 # TO USE SEMANTIC-UI AND MODAL
 
-from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
+from flask import Flask, render_template, flash, redirect, url_for, session, request
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, RadioField, BooleanField, validators
 from wtforms.validators import DataRequired
@@ -42,7 +42,10 @@ def register():
     login_form = LoginForm()
 
     if register_form.validate_on_submit():
-        ...  # handle the register form
+
+        return redirect(url_for('register'))
+
+    # handle the register form
     # render the same template to pass the error message
     # or pass `form.errors` with `flash()` or `session` then redirect to /
     return render_template('2from.html', register_form=register_form, login_form=login_form)
@@ -54,9 +57,9 @@ def login():
     login_form = LoginForm()
 
     if login_form.validate_on_submit():
-        ...  # handle the login form
-    # render the same template to pass the error message
-    # or pass `form.errors` with `flash()` or `session` then redirect to /
+
+        return redirect(url_for('login'))
+
     return render_template('2from.html', register_form=register_form, login_form=login_form)
 
         
