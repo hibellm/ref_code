@@ -61,15 +61,65 @@ sorted(x.keys())
 
 #########################
 #LOOPING
-for i, v in enumerate(['tic', 'tac', 'toe']):
+mylist = ['ket','kful','gether']
+game = ['tic', 'tac', 'toe']
+for i, v in enumerate(game):
     print(i, v)
 
+zlist=list(zip(game,mylist))
+for i in zlist:
+    print(f"{i[0]}{i[1]}")
 
 #########################
 
-#########################
+ignore_data = ['dm_','ae_']
+datalist = ['dm_','ae','cm_','ec_','demo','dm','ae_','AE_']
+
+for ds in datalist:
+    if ds in ignore_data:
+        print(f'Ignoring {ds}')
+    else:
+        print(f'Processing {ds}')
+
+
 
 #########################
+# Repeat 10 times some code, with a wait of 5 seconds
+import time
+for i in range(1,11):
+        try:
+            print(f'{x}worked')
+        except Exception as e:
+            print(f'Try {i} Failed - {e}')
+            time.sleep(5)
+            continue
+        break
+
+#########################
+# REF https://www.programiz.com/python-programming/datetime/strptime
+import time
+import datetime
+
+# DATETIME DATATYPE
+x = datetime.datetime.utcnow()
+y=str(x)
+
+# READ IN A STRING INTO A DATETIME"
+x2= datetime.datetime.strptime(y,format("%Y-%m-%d %H:%M:%S.%f"))
+x3= datetime.datetime.strptime('2019-12-31',format("%Y-%m-%d"))
+x4= datetime.datetime.strptime('2019-12-31 10:21:12',format("%Y-%m-%d %I:%M:%S"))
+
+
+# PRINTING OUT A DATETIME DATATYPE IN DIFFERENT FORMATS
+print(f'{x.strftime("%A, %d. %B %Y %I:%M%p")}')
+print(f'{x.strftime("%A, %d. %B %Y %I:%M%p %Z")}')
+print(f"{x.isoformat()}")
+print(f"{x.timetuple()}")
+
+
+# DIFFERENCE BETWEEN DATES (TIME DELTA)
+delta1 = x4-x2
+indays = delta1.days
 
 #########################
 

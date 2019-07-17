@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script>
+        $(document)
+          .ready(function() {
+            $('#testform')
+              .form({
+                  inline: true,
+                  fields: {
+                          skills: {
+                            identifier: 'maxtag',
+                            rules: [
+                                      {
+                                        type   : 'minCount[2]',
+                                        prompt : 'Please select at least two skills'
+                                      }
+                                    ]
+                          }
+
+    }
+                })
+              });      
+        </script>
+  </head>
+<body>
+
+<div class="ui main container">
+
+  <div class="ui segment teal inverted center aligned">
+    <h1>Form test</h1>
+  </div>
+  <h1>About the App</h1>
+  
+  {% include 'includes/_messages.html' %}
+
+
+<div class="ui grid two column">
+  <div class="ui column">
+  <form class="ui form" action="/selectlist" method="POST" id="testform">
+      <div class="ui form">
+        <div>
+            <input class="ui button" type="submit" value="Submit" />
+        </div>
+
+      <div class="ui sub header">Multiple</div>
+      <div class="field">
+        <select multiple="" name="loadlist" class="ui fluid normal dropdown" id="d2clear">
+          {% for item in datalist %}
+            <option class="red" value="{{item}}">
+              <div class="ui label red">{{item}}</div>
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="ui fluid multiple search selection dropdown" id="country">
+        <input type="hidden" name="country">
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Country</div>
+          <div class="menu">
+            <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+            <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+            <div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+            <div class="item" data-value="dz"><i class="dz flag"></i>Algeria</div>
+            <div class="item" data-value="as"><i class="as flag"></i>American Samoa</div>
+            <div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
+            <div class="item" data-value="xx"><div class="ui label">XXXX</div></div>
+          </div>
+        </div>
+
+      </div>
+  </form>
+  </div>
+  <div class="ui column">
+    <div class="ui segment">
+      <div class="ui title">Results</div>
+    </div>
+
+    {% if y is defined %}
+        value of variable: {{ y }}
+    {% else %}
+        variable is not defined
+    {% endif %}
+
+<!--    {% if y %}-->
+      {% for ds in y %}
+        {{ds}}
+      {% endfor %}
+<!--    {% endif %}-->
+  </div>
+
+</div>
+
+</body>
+
+<script>
+    $('#d1clear').dropdown();
+    $('#country').dropdown();
+    $('#d2clear').dropdown({allowAdditions: true});
+    $('#maxtag').dropdown({maxSelections: 3});
+    $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');
+                                            $('#cb, #sl, #tg').checkbox('uncheck');});
+
+    $('.ui.radio.checkbox').checkbox();
+    $('#cb, #sl, #tg').checkbox();
+    
+    $('#s1clear').dropdown({maxselection: 1});          
+
+    //form validation
+
+    $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+    $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+    $('#cb1').checkbox();
+    $('.message .close').on('click', function() {$(this).closest('.message').transition('fade'); });
+ </script>
+
+</html>

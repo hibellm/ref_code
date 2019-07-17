@@ -1,0 +1,149 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+  <h1>Example HTML elements</h1>
+  <p class="lead">This is a description</p>
+</div>
+
+<!--tabs-->
+<div class="ui top attached tabular menu">
+  <a class="active item" data-tab="first">First</a>
+  <a class="item" data-tab="second">Second</a>
+  <a class="item" data-tab="third">Third</a>
+</div>
+
+<div class="ui bottom attached active tab segment" data-tab="first">
+  <div class="ui segment">
+    <h1>Simple one column</h1>
+    <div class="ui grid">
+      <div class="ui column">
+        <div class="ui segment red">
+          <img class="ui small image" src="/static/images/image.png">
+          <div class="ui right aligned category search">
+              <div class="ui icon input">
+                <input class="prompt" type="text" placeholder="Search Github...">
+                <i class="ui icon github"></i>
+              </div>
+              <div class="ui segment">
+                <div class="results"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui bottom attached tab segment" data-tab="second">
+  <div class="ui segment">
+    <h1>Simple three column</h1>
+<!--    <div class="ui grid">USING THIS WILL GIVE A COLUMN 1 WIDE-->
+    <div class="ui grid three column">
+      <div class="ui column">
+        <div class="ui segment red">
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+      <div class="ui column">
+        <div class="ui segment blue">
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+      <div class="ui column">
+        <div class="ui segment green">
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui bottom attached tab segment" data-tab="third">
+  <div class="ui segment">
+    <h1>Complex example (based on 16 cols values)</h1>
+<!--    <div class="ui grid">USING THIS WILL GIVE A COLUMN 1 WIDE-->
+    <div class="ui grid four column">
+      <div class="ui two column row">
+        <div class="ui column">
+          <div class="ui segment red">
+            <img class="ui small image" src="/static/images/image.png">
+          </div>
+        </div>
+        <div class="ui column">
+          <div class="ui segment blue">
+            <img class="ui small image" src="/static/images/image.png">
+          </div>
+        </div>
+      </div>
+
+      <div class="ui column">
+        <div class="ui segment green">
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+      <div class="ui column">
+        <div class="ui segment green">
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+      <div class="ui six wide column">
+        <div class="ui segment green">
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+      <div class="right floated center aligned ten wide column">
+        <div class="ui segment green">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam atque delectus, deserunt error illum ipsa ipsam ipsum, iure iusto, laboriosam laborum laudantium reiciendis rem repellat similique sit soluta veritatis voluptatibus?</p>
+          <img class="ui small image" src="/static/images/image.png">
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+
+<script>
+  $('.menu .item').tab();
+
+  $('.ui.search')
+  .search({
+    type          : 'category',
+    minCharacters : 3,
+    apiSettings   : {
+      onResponse: function(githubResponse) {
+        var
+          response = {
+            results : {}
+          }
+        ;
+        // translate GitHub API response to work with search
+        $.each(githubResponse.items, function(index, item) {
+          var
+            language   = item.language || 'Unknown',
+            maxResults = 8
+          ;
+          if(index >= maxResults) {
+            return false;
+          }
+          // create new language category
+          if(response.results[language] === undefined) {
+            response.results[language] = {
+              name    : language,
+              results : []
+            };
+          }
+          // add result to category
+          response.results[language].results.push({
+            title       : item.name,
+            description : item.description,
+            url         : item.html_url
+          });
+        });
+        return response;
+      },
+      url: '//api.github.com/search/repositories?q={query}'
+    }
+  })
+;
+</script>
+{% endblock %}

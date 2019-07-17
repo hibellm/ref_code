@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <title>Ref-code Testing</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     {#<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slider.css') }}"> -->#}
   </head>
@@ -116,14 +118,15 @@
             cb1      : 'checked'}                 
         });
         
-   </script>
+    </script>
     <script>
       $(document).ready(function(){ $('#sorttable').tablesort() });
     </script>
 
-
   <body>
+
     {% include 'includes/_navbar.html' %}
+
     <div class="container">
       {% include 'includes/_messages.html' %}
       {% block body %}{% endblock %}
