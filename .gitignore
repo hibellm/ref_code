@@ -4,3 +4,4 @@ __pycharm__/*
 
 __pycache__/
 /.idea
+/sphinx/_build
