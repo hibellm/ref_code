@@ -6,10 +6,13 @@
 Welcome to Sphinx Example documentation's documentation!
 ========================================================
 
+This is where a description goes
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+      summary
       code
 
 Indices and tables
