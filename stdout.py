@@ -15,7 +15,7 @@ app = Flask(__name__)
 # assume that your homepage shows the console output.
 @app.route('/')
 def home():
-    output, errors = exc.execute("help",".")
+    output, errors = exc.execute("help", ".")
     print(output)
     output.rstrip() + '<br/>\n'
     return render_template('stdout.html', console_gave = [output, errors])
@@ -27,7 +27,7 @@ def index():
             time.sleep(0.1)
             yield '%s<br/>\n' % x
             
-    env = Environment(loader=FileSystemLoader('templates'),extensions=['jinja2.ext.with_','jinja2.ext.loopcontrols'])
+    env = Environment(loader=FileSystemLoader('templates'), extensions=['jinja2.ext.with_', 'jinja2.ext.loopcontrols'])
     tmpl = env.get_template('stdout.html')
     return Response(tmpl.generate(result=inner()))
     
@@ -36,12 +36,12 @@ def index():
 def index2():
     def inner2():    
         proc = subprocess.Popen(
-            ['python','code2run.py'],             #call something with a lot of output so we can see it            
+            ['python', 'code2run.py'],             #call something with a lot of output so we can see it
             universal_newlines=True,
             stdout=subprocess.PIPE
         )
 
-        for line in iter(proc.stdout.readline,''):
+        for line in iter(proc.stdout.readline, ''):
             time.sleep(0.1)                           # Don't need this just shows the text streaming
             yield line.rstrip() + '<br/>\n'
 
@@ -51,5 +51,5 @@ def index2():
 
 
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    app.secret_key = 'secret123'
     app.run(debug=True)

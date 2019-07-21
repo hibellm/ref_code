@@ -21,7 +21,17 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # init MYSQL
 mysql = MySQL(app)
 
-icontypes = {'file audio': 'm4a,mp3,oga,ogg,webma,wav', 'file archive': '7z,zip,rar,gz,tar', 'file picture': 'gif,ico,jpe,jpeg,jpg,png,svg,webp', 'file pdf': 'pdf', 'file word': 'doc,docx', 'file excel': 'xls,xlsx', 'file film': '3g2,3gp,3gp2,3gpp,mov,qt', 'file code': 'atom,plist,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml', 'file text': 'txt', 'file video': 'mp4,m4v,ogv,webm', 'globe': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
+icontypes = {'file audio': 'm4a,mp3,oga,ogg,webma,wav',
+             'file archive': '7z,zip,rar,gz,tar',
+             'file picture': 'gif,ico,jpe,jpeg,jpg,png,svg,webp',
+             'file pdf': 'pdf',
+             'file word': 'doc,docx',
+             'file excel': 'xls,xlsx',
+             'file film': '3g2,3gp,3gp2,3gpp,mov,qt',
+             'file code': 'atom,plist,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml',
+             'file text': 'txt',
+             'file video': 'mp4,m4v,ogv,webm',
+             'globe': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
 
 
 @app.route('/display')
@@ -52,7 +62,7 @@ def jinjacontrol():
         pass
     
 def makefile():
-    file = open('testfile.txt','w')  
+    file = open('testfile.txt', 'w')
     file.write('Hello World') 
     file.write('This is our new text file') 
     file.write('and this is another line.') 
@@ -71,8 +81,6 @@ def icon_fmt(filename):
     return i
 
 
-
-
 if __name__ == '__main__':
-    app.secret_key='secret123435345351'
+    app.secret_key = 'secret123435345351'
     app.run(debug=True)

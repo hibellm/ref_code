@@ -40,7 +40,7 @@ def formuserdetails():
             #SIMPLE TEXT BOX
             schemasel = request.values.getlist("onesel")
 
-        return render_template("formuserdetails.html", schemas=schemas,schemasel=schemasel) #During the initial request no variable is passed and the plain page is rendered, hence the second 'if' in the template page fails.
+        return render_template("formuserdetails.html", schemas=schemas, schemasel=schemasel)  # During the initial request no variable is passed and the plain page is rendered, hence the second 'if' in the template page fails.
       
     finally:
         pass    

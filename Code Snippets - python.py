@@ -122,6 +122,11 @@ delta1 = x4-x2
 indays = delta1.days
 
 #########################
+import unicodedata
+a = 'pýtĥöñ is awesome\n'
+b = unicodedata.normalize('NFD', a)
+b.encode('ascii', 'ignore').decode('ascii')
+print(b)
 
 #########################
 

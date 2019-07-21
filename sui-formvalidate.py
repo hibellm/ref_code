@@ -14,7 +14,7 @@ from datetime import datetime, date, time
 app = Flask(__name__)
 
 
-@app.route('/formval', methods=['GET','POST'])
+@app.route('/formval', methods=['GET', 'POST'])
 def formval():
 
     if request.method == 'POST':

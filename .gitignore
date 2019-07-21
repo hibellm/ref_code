@@ -3,3 +3,4 @@ __pycharm__/*
 \.idea/
 
 __pycache__/
+/.idea
