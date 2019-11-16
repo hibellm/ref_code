@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing - drag and drop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+  </head>
+
+<body>
+<div class="ui main container">
+
+  <div class="ui segment teal inverted center aligned">
+    <h1>Form test - drag and drop</h1>
+  </div>
+
+  {% include 'includes/_messages.html' %}
+
+  Number of logs : <strong>{{result}} </strong><br>
+
+  <div class="ui segment red">
+      <div class="ui right rail attached">
+        <div class="ui accordion fluid styled">
+          <div class="ui segment yellow inverted">
+            <div class="title"><i class="dropdown icon large"></i>Legend</div>
+            <div class="ui content">
+              <div class="ui list">
+                <div class="ui item"><i class="ui icon red bug"></i> In QC</div>
+                <div class="ui item"><i class="ui icon green check circle"></i>In Production</div>
+              </div>
+            </div>
+          </div>
+         </div>
+      </div>
+
+  <div class="ui accordion fluid styled">
+    <div class="title"><i class="dropdown icon large"></i>Database: abcd1234</div>
+    <div class="ui content">
+    <div class="ui segment purple inverted">
+    <div class="ui grid equal width columns">
+      <div class="ui column">
+        <div class="ui header">Tables</div>
+        <div class="ui list">
+          <div class="ui item">AE_</div>
+          <div class="ui item">CM_</div>
+          <div class="ui item">DM_</div>
+          <div class="ui item">EX_</div>
+        </div>
+      </div>
+      <div class="ui column"><div class="ui header">Views </div>
+        <div class="ui row">ANON <i class="ui icon red bug"></i></div>
+        <div class="ui row">RCR <i class="ui icon green check circle"></i></div>
+      </div>
+      <div class="ui column">
+        <div class="ui header">Deliverables</div>
+        <div class="ui list">
+          <div class="ui item"><i class="ui icon file archive outline"></i> zipfile1.zip</div>
+          <div class="ui item">zipfile1.zip</div>
+          <div class="ui item">zipfile1.zip</div>
+          <div class="ui item">zipfile1.zip</div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <!--second entry-->
+    <div class="title"><i class="dropdown icon large"></i>Database: abcd1234</div>
+    <div class="ui content">
+    <div class="ui segment green inverted">
+    <div class="ui grid equal width columns">
+      <div class="ui column">
+        <div class="ui header">Tables</div>
+        <div class="ui list">
+          <div class="ui item">AE_</div>
+          <div class="ui item">CM_</div>
+          <div class="ui item">DM_</div>
+          <div class="ui item">EX_</div>
+        </div>
+      </div>
+      <div class="ui column"><div class="ui header">Views </div>
+        <div class="ui row">ANON <i class="ui icon red bug"></i></div>
+        <div class="ui row">RCR <i class="ui icon green check circle"></i></div>
+      </div>
+      <div class="ui column">
+        <div class="ui header">Deliverables</div>
+        <div class="ui list">
+          <div class="ui item"><i class="ui icon file archive outline"></i> zipfile1.zip</div>
+          <div class="ui item">zipfile1.zip</div>
+          <div class="ui item">zipfile1.zip</div>
+          <div class="ui item">zipfile1.zip</div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+<!--    entry for each table-->
+    {% for db in tables | groupby('table_schema') %}
+      <div class="title"><i class="dropdown icon large"></i>Database: {{db[0]}}</div>
+        <div class="ui content">
+              <div class="ui segment green inverted">
+                <div class="ui grid equal width columns">
+                  <div class="ui column">
+                    <div class="ui header">Tables</div>
+                     Number: <strong>{{ db[1] | list | count }}</strong> Location : {{db[0]}}
+                      {% for d in db[1] %}
+                        <div class="ui list">
+                            <div class="ui item"><div class="ui label"> {{d['table_name']}}</div></div>
+                        </div>
+                      {% endfor %}
+                  </div>
+
+        </div></div></div>
+
+    {% endfor %}
+  </div>
+  </div>
+
+  <hr>
+
+  <form class="ui form" action="/formdragdrop" method="POST" id="testform">
+  <div class="ui segment">
+    <div class="ui grid three columns">
+      <div class="ui column">
+        <div class="ui label" id="hash" draggable="true" ondragstart="drag(event)" width="336" height="69"><i class="ui icon barcode"></i>HASH</div>
+        <div class="ui label" id="integer" draggable="true" ondragstart="drag(event)" width="336" height="69"><i class="ui icon hashtag"></i>INTEGER</div>
+        <div class="ui label" id="varchar" draggable="true" ondragstart="drag(event)" width="336" height="69"><i class="ui icon font "></i>VARCHAR</div>
+        <div class="ui label" id="date" draggable="true" ondragstart="drag(event)" width="336" height="69"><i class="ui icon calendar alternate outline"></i>DATE</div>
+        <div class="ui label" id="timestamp" draggable="true" ondragstart="drag(event)" width="336" height="69"><i class="ui icon clock outline"></i>TIMESTAMP</div>
+      </div>
+      <div class="ui column green">
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+      <div class="ui column blue">
+          <div class="field"><input type="text" name="mjh0" placeholder="First Name" ></div>
+          <div class="field"><input type="text" name="mjh1" placeholder="Last Name" ></div>
+          <div class="field"><input type="text" name="mjh2" placeholder="USUBJID" ></div>
+          <div class="field"><input type="text" name="mjh3" placeholder="SITEID" ></div>
+          <div class="field"><input type="text" name="mjh4" placeholder="First Name" ></div>
+          <div class="field"><input type="text" name="mjh5" placeholder="First Name" ></div>
+      </div>
+    </div>
+    <div><input class="ui button" type="submit" value="Submit" /></div>
+  </div>
+
+    <hr>
+
+    <div class="ui segment">
+        <div class="field">
+          <select name="sel1" class="ui fluid normal dropdown"  id="sel1" placeholder="TIMESTAMP">
+            <option value="date"><i class="af flag"></i>date</option>
+            <option value="integer"><i class="ui icon hashtag"></i>integer</option>
+            <option value="varchar"><i class="af flag"></i>Varchar</option>
+            <option value="ts"><i class="af flag"></i>timestamp</option>
+          </select>
+          <select name="sel2" class="ui fluid normal dropdown"  id="sel2" placeholder="TIMESTAMP">
+            <label>test</label>
+            <option value="date"><i class="af flag"></i>date</option>
+            <option value="integer"><i class="ui icon hashtag"></i>integer</option>
+            <option value="varchar"><i class="af flag"></i>Varchar</option>
+            <option value="ts"><i class="af flag"></i>timestamp</option>
+          </select>
+        </div>
+  </div>
+
+  </form>
+
+</div>
+
+
+</body>
+<script>
+    $('#d1clear').dropdown();
+    $('.ui.dropdown').dropdown({maxselection: 1});
+    $('#maxtag').dropdown({maxSelections: 3});
+    $('#tagclear').on('click', function() { $('#maxtag, #d1clear, #d2clear, #tagname').dropdown('clear');
+                                            $('#cb, #sl, #tg').checkbox('uncheck');});
+
+    $('.ui.radio.checkbox').checkbox();
+    $('#cb, #sl, #tg').checkbox();
+    
+    $('#s1clear').dropdown({maxselection: 1});          
+
+    $('.ui.accordion').accordion();
+
+    //form validation
+
+    $('#formreset').form('reset');// will return all form values to their default value. The value the form fields were set when the page loaded.
+    $('#formclear').form('clear');// will remove all values from form fields and reset dropdowns to placeholder text
+    $('#cb1').checkbox();
+    $('.message .close').on('click', function() {$(this).closest('.message').transition('fade'); });
+  </script>
+
+</html>

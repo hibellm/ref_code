@@ -41,7 +41,7 @@ print(f'{(list1+list2)}')
 #########################
 # LISTS
 
-print(f"{x for x in 'abracadabra' if x not in 'abc'}")
+print(f"{[x for x in 'abracadabra' if x not in 'abc']}")
 print(f"{set('abracadabra')}")
 
 
@@ -129,6 +129,83 @@ b.encode('ascii', 'ignore').decode('ascii')
 print(b)
 
 #########################
+
+# USING MASTER LIST OF VARIABLE INFO
+
+sdtm= [['Event type','DM','USUBJID','Unique subject Id','Identifier','Char','20'],
+       ['Event type','DM','AGE','Age at baseline','Identifier','Num','8'],
+       ['Event type','DM','BIRTHDT','Birthdate','Time','Char','20'],
+       ['Event type','DM','RACE','Race','Identifier','Char','20']
+       ]
+
+varlist = [['DM','USUBJID'],['DM','AGE'],['DM','AGEU'],['DM','BIRTHDT'],['DM','ETHNIC'],['CO','USUBJID']]
+
+for var in varlist:
+    for ent in sdtm:
+        if var[0] in ent[1] and var[1] in ent[2]:
+            print(f"A match is {ent[1]}, {ent[2]}")
+        elif var[0] in ent[1]:
+            print(f"No match is {ent[1]}, {ent[2]}")
+
+
+###
+# YAML
+import yaml
+import io
+
+#yaml.dump(data, encoding=('utf-8'))
+# Write YAML file
+# Define data
+data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
+        'a string': 'bla',
+        'another dict': {'foo': 'bar',
+                         'key': 'value',
+                         'the answer': 42,
+                         'mylist': ['a','b','c']}}
+
+with io.open('data.yml', 'w', encoding='utf8') as outfile:
+    yaml.dump(data, outfile, default_flow_style=False, allow_unicode=True)
+
+# Read YAML file
+with open("data.yml", 'r') as stream:
+    todoproc = yaml.safe_load(stream)
+
+
+with open("configtest.yml", 'r') as stream:
+    configtest = yaml.safe_load(stream)
+
+
+if configtest['withdl']:
+    print('Going to load data')
+if configtest['makecsv']:
+    print('Going to make csv files')
+if configtest['logname']:
+    print(f"Going to make log file as {configtest['logname']}")
+
+######################
+# TESTING SCHEMA VALIDATION
+from schema import Schema, And, Use, Optional
+
+data = [{'name': 'Sue', 'age': '28', 'gender': 'Squid'},
+        {'name': 'Sam', 'age': '42'},
+        {'name': 'Sacha', 'age': '20', 'gender': 'KID'}]
+
+schema = Schema([{'name': And(str, len),
+                  'age':  And(Use(int), lambda n: 18 <= n <= 99),
+                  Optional('gender'): And(str, Use(str.lower),lambda s: s in ('squid', 'kid'))}])
+
+validated = schema.validate(data)
+print(f"valid? {schema.is_valid(data)}")
+
+
+
+data = [{'flags': True ,
+         'all': ''}]
+schema = Schema([{'flags': bool,
+                  'all': And(str,len)}])
+validated = schema.validate(data)
+print(f"valid? {schema.is_valid(data)}")
+
 
 
 

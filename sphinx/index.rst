@@ -12,8 +12,11 @@ This is where a description goes
    :maxdepth: 2
    :caption: Contents:
 
-      summary
-      code
+.. automodule:: sphinx_example
+   :members:
+   
+summary
+
 
 Indices and tables
 ==================

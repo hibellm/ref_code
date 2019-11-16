@@ -1,0 +1,8 @@
+actionlist:
+  setup: True
+  load: True
+  loadlist:
+  loadlistignore: yi
+  view: 42
+  output: Ae,dm,cm
+  archive: True

@@ -1,0 +1,22 @@
+# TEST CONFIG YAML FILE FOR CONFIGURATION SETUPS
+
+# YAML
+-
+  - HTML
+  - LaTeX
+  - SGML
+  - VRML
+  - XML
+  - YAML
+-
+  - BSD
+  - GNU Hurd
+  - Linux
+
+- abc
+  - defg
+  -xyz
+
+boolean: true
+integer: 3
+float: 3.14

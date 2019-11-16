@@ -1,0 +1,18 @@
+# TEST CONFIG YAML FILE FOR CONFIGURATION SETUPS
+# YAML
+bool: [true, false, on, off]
+none: [~, null]
+
+actions: { load: True, view: True, export: True }
+
+load: { keep: [ae,dm,cm,xm], drop: [yi] }
+view: { makeview: True}
+export: { export: [ae,dm,cm,xm], suffix: [] }
+log: {logname: mylogfile.log, logpath: /abc/xyz}
+
+
+int: 42
+float: 3.14159
+list: [LITE, RES_ACID, SUS_DEXT]
+dict: {hp: 13, sp: 5}
+
