@@ -31,17 +31,26 @@ icontypes = {'file audio': 'm4a,mp3,oga,ogg,webma,wav',
              'file picture': 'gif,ico,jpe,jpeg,jpg,png,svg,webp',
              'file pdf': 'pdf',
              'file word': 'doc,docx',
-             'file excel': 'xls,xlsx',
+             'file excel': 'xls,xlsx,xlsm',
              'file film': '3g2,3gp,3gp2,3gpp,mov,qt',
              'file code': 'atom,plist,bat,bash,c,cmd,coffee,css,hml,js,json,java,less,markdown,md,php,pl,py,rb,rss,sass,scpt,swift,scss,sh,xml,yml',
              'file text': 'txt',
              'file video': 'mp4,m4v,ogv,webm',
              'globe': 'htm,html,mhtm,mhtml,xhtm,xhtml'}
 
+testdata = [['USUBJID', 'VARCHAR'], ['AGE', 'INT'], ['BIRTHDT', 'DATETIME']]
+
+@app.template_filter('icon_fmt')
+def icon_fmt(filename):
+    i = 'fa-file-o'
+    for icon, exts in icontypes.items():
+        if filename.split('.')[-1] in exts:
+            i = icon
+    return i
 
 @app.route('/formdragdrop', methods=['GET', 'POST'])
 def formdragdrop():
-
+    testlist = ['file1.zip', 'file2.txt', 'file3.xlsm', 'file4.mp3', 'file5.pdf']
     try:
         cur = mysql.connection.cursor()
         print('Connection worked!')
@@ -62,20 +71,36 @@ def formdragdrop():
 
     if request.method == 'POST':
 
+        x = request.values
+        # print(x)
         name1 = request.values.get("div1")
         # name1 = request.values("div1")
         # text = request.form['mjh']
-        print(f"mjh0 {request.form['mjh0']}")
-        print(f"mjh1 {request.form['mjh1']}")
-        print(f"mjh2 {request.form['mjh2']}")
-        print(f"mjh3 {request.form['mjh3']}")
-        print(f"mjh4 {request.form['mjh4']}")
-        print(f"mjh5 {request.form['mjh5']}")
-        print(f"sel1 {request.form['sel1']}")
+
+        # print(f"fname {request.form['fnamedt']} /{request.form['fname']}")
+        # print(f"lname {request.form['lname']}")
+        # print(f"siteid {request.form['siteid']}")
+        # print(f"ptid {request.form['ptid']}")
+        # print(f"age {request.form['age']}")
+        # print(f"arm {request.form['arm']}")
+        #
+        # print(f"sel1 {request.form['sel1']}")
+
+
+        mynewlist = []
+        for test in testdata:
+            x = request.form[f'{test[0].lower()}dt']
+            y = request.form[f'{test[0].lower()}']
+            if y == '':
+                y = x
+            print(f"{test[0]} was {x} but want {y}")
+            mynewlist.append([test[0], x, y])
+
+        print(mynewlist)
 
         return redirect(url_for('formdragdrop'))
     
-    return render_template('formdragdrop.html', result=result, eventsd=eventsd, tables=tables)
+    return render_template('formdragdrop.html', result=result, eventsd=eventsd, tables=tables, testlist=testlist, testdata=testdata)
 
 
 if __name__ == '__main__':

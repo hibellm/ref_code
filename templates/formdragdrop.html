@@ -3,26 +3,40 @@
   <head>
     <meta charset="utf-8">
     <title>Ref-code Testing - drag and drop</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="ttps://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script>
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
 
-<script>
-function allowDrop(ev) {
-  ev.preventDefault();
-}
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
 
-function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    //ev.target.appendChild(document.getElementById(data));  ADD
+    ev.target.removeChild(ev.target.childNodes[0]);
+    ev.target.appendChild(document.getElementById(data));
+  }
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#ziptable').DataTable({
+        responsive: true
+      });
+      $('[data-toggle="tooltip"]').tooltip();
+      // $('body').tooltip({selector:'[data-content="tooltip"]'});
+    } );
+  </script>
 
-function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
-</script>
   </head>
 
 <body>
@@ -50,6 +64,46 @@ function drop(ev) {
           </div>
          </div>
       </div>
+
+
+   <table class="ui sortable celled table" id="ziptable">
+          <thead>
+            <tr>
+              <th class="sixteen wide">Zipname</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+    <!--entry for each table-->
+    {% for db in tables | groupby('table_schema') %}
+      <tr>
+        <td>
+            <div class="ui accordion fluid styled">
+                <div class="title"><i class="dropdown icon large"></i>Database: {{db[0]}}</div>
+                  <div class="ui content">
+                    <div class="ui segment grey tertiary inverted">
+                      <div class="ui grid equal width columns">
+                        <div class="ui column">
+                          <div class="ui header">Tables</div>
+                           Number: <strong>{{ db[1] | list | count }}</strong> Location : {{db[0]}}
+                            {% for d in db[1] %}
+                              <div class="ui list">
+                                  <div class="ui item"><div class="ui label"> {{d['table_name']}}</div></div>
+                              </div>
+                            {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </td>
+      </tr>
+    {% endfor %}
+
+          </tbody>
+   </table>
+
 
   <div class="ui accordion fluid styled">
     <div class="title"><i class="dropdown icon large"></i>Database: abcd1234</div>
@@ -102,10 +156,9 @@ function drop(ev) {
       <div class="ui column">
         <div class="ui header">Deliverables</div>
         <div class="ui list">
-          <div class="ui item"><i class="ui icon file archive outline"></i> zipfile1.zip</div>
-          <div class="ui item">zipfile1.zip</div>
-          <div class="ui item">zipfile1.zip</div>
-          <div class="ui item">zipfile1.zip</div>
+          {% for lfile in testlist %}
+          <div class="ui item"><i class="ui icon large red {{lfile.split('.')[-1]|icon_fmt}}"></i> {{lfile}}</div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -116,7 +169,7 @@ function drop(ev) {
     {% for db in tables | groupby('table_schema') %}
       <div class="title"><i class="dropdown icon large"></i>Database: {{db[0]}}</div>
         <div class="ui content">
-              <div class="ui segment green inverted">
+              <div class="ui segment grey tertiary inverted">
                 <div class="ui grid equal width columns">
                   <div class="ui column">
                     <div class="ui header">Tables</div>
@@ -150,12 +203,17 @@ function drop(ev) {
         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
       </div>
       <div class="ui column blue">
-          <div class="field"><input type="text" name="mjh0" placeholder="First Name" ></div>
-          <div class="field"><input type="text" name="mjh1" placeholder="Last Name" ></div>
-          <div class="field"><input type="text" name="mjh2" placeholder="USUBJID" ></div>
-          <div class="field"><input type="text" name="mjh3" placeholder="SITEID" ></div>
-          <div class="field"><input type="text" name="mjh4" placeholder="First Name" ></div>
-          <div class="field"><input type="text" name="mjh5" placeholder="First Name" ></div>
+
+        {% for test in testdata %}
+          <div class="field">
+            <div class="ui labeled input">
+              <div class="ui label">{{test[0]}} :</div>
+                <input type="text" name="{{test[0]|lower}}" placeholder="{{test[0]}}">
+                <input type="text" name="{{test[0]|lower}}dt" value="{{test[1]}}" hidden>
+            </div>
+          </div>
+        {% endfor %}
+
       </div>
     </div>
     <div><input class="ui button" type="submit" value="Submit" /></div>
