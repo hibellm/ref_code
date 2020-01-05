@@ -6,7 +6,7 @@
 Welcome to Sphinx Example documentation's documentation!
 ========================================================
 
-This is where a description goes
+This is test documentation to see if I can document my python modules/programs
 
 .. toctree::
    :maxdepth: 2
@@ -14,9 +14,8 @@ This is where a description goes
 
 .. automodule:: sphinx_example
    :members:
-   
-summary
 
+.. autofunction:: sphinx_example.py
 
 Indices and tables
 ==================
@@ -24,3 +23,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+* :ref:`cheatsheet`
