@@ -1,7 +1,6 @@
 #REFERENCE DBShortCode
 
-# TO USE SEMANTIC-UI AND MODAL
-
+# TO USE SEMANTIC-UI AND CARD LAYOUTS
 
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 #from data import Vendors
@@ -14,10 +13,10 @@ from datetime import datetime, date, time
 
 app = Flask(__name__)
 
+@app.route('/cards')
+def cards():
 
-@app.route('/')
-def index():
-    return render_template('accordion.html')
+    return render_template('cards.html', **locals())
 
 
 if __name__ == '__main__':

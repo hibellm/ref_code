@@ -1,0 +1,298 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="ui icon hammer yellow"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="#"><i class="ui icon slideshare yellow massive"></i></a>
+        <div id="close-sidebar">
+          <i class="ui icon times circle"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="ui image rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
+        </div>
+        <div class="user-info">
+          <span class="user-name">John
+            <strong>Smith</strong>
+          </span>
+          <span class="user-role">Administrator</span>
+          <span class="user-status">
+            <i class="ui icon circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+              <div class="item inverted red">
+                <div class="ui icon input">
+                  <i class="search icon"></i>
+                  <input type="text" placeholder="Search mail...">
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <div class="ui vertical menu secondary inverted left aligned">
+          <a class="item"><i class="gamepad icon"></i>Games</a>
+          <a class="item"><i class="gamepad icon"></i>Games</a>
+          <a class="item"><i class="gamepad icon"></i>Games</a>
+          <a class="item"><i class="gamepad icon"></i>Games</a>
+        </div>
+      </div>
+
+
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>General</span>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="ui icon tachometer alternate"></i>Dashboard
+<!--              <span>Dashboard</span>-->
+<!--              <span class="badge badge-pill badge-warning">New</span>-->
+              <div class="ui label right yellow">New</div>
+            </a>
+
+            <div class="sidebar-submenu">
+              <div class="ui items">
+                <div class="ui item">
+                  <a href="#">Dashboard 1<div class="ui label green">Pro</div></a>
+                </div>
+              </div>
+              <ul>
+                <li>
+                  <a href="#">Dashboard 1
+                    <div class="ui label green">Pro</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Dashboard 2</a>
+                </li>
+                <li>
+                  <a href="#">Dashboard 3</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="ui icon shopping cart"></i>
+              <span>E-commerce</span>
+              <span class="ui red circular label">3</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="#">Products
+
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Orders</a>
+                </li>
+                <li>
+                  <a href="#">Credit cart</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="ui icon gem"></i>
+              <span>Components</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="#">General</a>
+                </li>
+                <li>
+                  <a href="#">Panels</a>
+                </li>
+                <li>
+                  <a href="#">Tables</a>
+                </li>
+                <li>
+                  <a href="#">Icons</a>
+                </li>
+                <li>
+                  <a href="#">Forms</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="ui icon chart line"></i>
+              <span>Charts</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="#">Pie chart</a>
+                </li>
+                <li>
+                  <a href="#">Line chart</a>
+                </li>
+                <li>
+                  <a href="#">Bar chart</a>
+                </li>
+                <li>
+                  <a href="#">Histogram</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="ui icon globe"></i>
+              <span>Maps</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="#">Google maps</a>
+                </li>
+                <li>
+                  <a href="#">Open street map</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="header-menu">
+            <span>Extra</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="ui icon book"></i>
+              <span>Documentation</span>
+              <span class="ui label right blue ">Beta</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="ui icon calendar"></i>
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-folder"></i>
+              <span>Examples</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+      <a href="#">
+        <i class="ui icon bell"></i>
+        <div class="ui label floating red right circular">3</div>
+      </a>
+      <a href="#">
+        <i class="ui icon envelope"></i>
+        <div class="ui label floating green right circular">7</div>
+      </a>
+      <a href="#">
+          <i class="ui icon cog"></i>
+          <div class="ui label floating right inverted"><i class="ui icon circle green top right"></i></div>
+      </a>
+      <a href="#">
+        <i class="ui icon power off"></i>
+      </a>
+    </div>
+  </nav>
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+      <h2>Pro Sidebar</h2>
+      <hr>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <p>This is a responsive sidebar template with dropdown menu based on bootstrap 4 framework.</p>
+          <p> You can find the complete code on <a href="https://github.com/azouaoui-med/pro-sidebar-template" target="_blank">
+              Github</a>, it contains more themes and background image option</p>
+        </div>
+        <div class="form-group col-md-12">
+          <iframe src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=star&count=true&size=large" frameborder="0" scrolling="0" width="140px" height="30px"></iframe>
+          <iframe src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="140px" height="30px"></iframe>
+        </div>
+        <div class="form-group col-md-12">
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">New !</h4>
+            <p>New react library is now available, have a look : <a href="https://github.com/azouaoui-med/react-pro-sidebar" target="_blank">
+                React pro sidebar</a></p>
+
+          </div>
+
+        </div>
+      </div>
+      <h5>More templates</h5>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card rounded-0 p-0 shadow-sm">
+            <img src="https://user-images.githubusercontent.com/25878302/58369568-a49b2480-7efc-11e9-9ca9-2be44afacda1.png" class="card-img-top rounded-0" alt="Angular pro sidebar">
+            <div class="card-body text-center">
+              <h6 class="card-title">Angular Pro Sidebar</h6>
+              <a href="https://github.com/azouaoui-med/angular-pro-sidebar" target="_blank" class="btn btn-primary btn-sm">Github</a>
+              <a href="https://azouaoui-med.github.io/angular-pro-sidebar/demo/" target="_blank" class="btn btn-success btn-sm">Preview</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="card rounded-0 p-0 shadow-sm">
+            <img src="https://user-images.githubusercontent.com/25878302/58369258-33f20900-7ef8-11e9-8ff3-b277cb7ed7b4.PNG" class="card-img-top rounded-0" alt="Angular pro sidebar">
+            <div class="card-body text-center">
+              <h6 class="card-title">Angular Dashboard</h6>
+              <a href="https://github.com/azouaoui-med/lightning-admin-angular" target="_blank" class="btn btn-primary btn-sm">Github</a>
+              <a href="https://azouaoui-med.github.io/lightning-admin-angular/demo/" target="_blank" class="btn btn-success btn-sm">Preview</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+
+
+
+<!--   <div class="ui sidebar inverted vertical menu visible" id="sbslide">-->
+<!--    <a class="item"><i class="ui icon left open box"></i>1</a>-->
+<!--    <a class="item"><i class="ui icon left dashboard"></i>2</a>-->
+<!--    <a class="item"><i class="ui icon left chart"></i>3</a>-->
+<!--   </div>-->
+<!--   <div class="ui sidebar inverted vertical menu thin visible" id="sbicon">-->
+<!--    <a class="item"><i class="ui icon left open box"></i></a>-->
+<!--    <a class="item"><i class="ui icon left dashboard"></i></a>-->
+<!--    <a class="item"><i class="ui icon left slideshow"></i></a>-->
+<!--   </div>-->
+<!--  <div class="pusher">-->
+<!--    <div class="jumbotron text-center">-->
+<!--      <h1>Menu Slider (sidebar) test</h1>-->
+<!--      <div class="ui button large green centered" onclick="$('#sbslide').sidebar('toggle');">click on this for sidebar</div>-->
+<!--    </div>-->
+<!--      <h1>About the App</h1>-->
+<!--        <p>some content</p>-->
+<!--  </div>-->
+
+{% endblock %}

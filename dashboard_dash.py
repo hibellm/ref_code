@@ -2,14 +2,14 @@ import pandas as pd
 # from definitions import ROOT_DIR
 import os
 import dash
-# import dash_wordcloud
+import dash_wordcloud
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import numpy as np
 import plotly.graph_objs as go
 
-ROOT_DIR='static'
+ROOT_DIR = 'static'
 
 data_phones_csv = os.path.join(ROOT_DIR, 'data/cell_phone_total.csv')
 data_phones = pd.read_csv(data_phones_csv, delimiter=';')
@@ -142,4 +142,4 @@ def update_wordcloud(year):
 
 
 if __name__ == '__main__':
-    app.run_server(port=5000,debug=True)
+    app.run_server(port=5000, debug=True)

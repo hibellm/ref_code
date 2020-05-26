@@ -4,15 +4,21 @@
     <meta charset="utf-8">
     <title>Ref-code Testing</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css">
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css">/-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.4/dist/semantic.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     {#<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slider.css') }}"> -->#}
   </head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--FOR THE SLIDERMENU  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.js"></script>/-->
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.4/dist/semantic.min.js"></script>
     
     <!--FOR MARKDOWN-->
     <link rel="import" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/build/zero-md.html">
@@ -29,6 +35,7 @@
     
     <script>
       $('#roledd').dropdown();
+
     </script>
     <script>
     $('.message .close').on('click', function() {
@@ -44,6 +51,23 @@
     <script>
       $('.menu .item').tab();
       $('.ui.accordion').accordion();
+      $('.ui.rating').rating('disable');
+      $(document).ready(function(){
+        $('#eventdates_calendar').calendar({
+            initialDate: new Date(2019,3,1),
+            eventDates: [
+                {
+                  date: new Date(2019,3,21),
+                  message: 'Show me in light purple',
+                  class: 'inverted purple'
+                },{
+                  date: new Date(2019,3,22),
+                  message: '<a href="https://www.bbc.co.uk">BBC</a>',
+                  class: 'green'
+                }
+            ]
+        });
+      });
 
 
       $('#d1clear').dropdown();
@@ -117,12 +141,49 @@
             skills   : ['minCount[2]', 'min2-max3'],
             cb1      : 'checked'}                 
         });
-        
+
     </script>
     <script>
       $(document).ready(function(){ $('#sorttable').tablesort() });
     </script>
+    <script>
+      $(document).ready(function(){
+      $('#sbicon').sidebar('visible');
+      $('#sbslide').sidebar('toggle')
+      });
+    </script>
+  <script>
+    $(".sidebar-dropdown > a").click(function() {
+  $(".sidebar-submenu").slideUp(200);
+  if (
+    $(this)
+      .parent()
+      .hasClass("active")
+  ) {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .parent()
+      .removeClass("active");
+  } else {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .next(".sidebar-submenu")
+      .slideDown(200);
+    $(this)
+      .parent()
+      .addClass("active");
+  }
+});
 
+$("#close-sidebar").click(function() {
+  $(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+  $(".page-wrapper").addClass("toggled");
+});
+
+
+  </script>
   <body>
 
     {% include 'includes/_navbar.html' %}

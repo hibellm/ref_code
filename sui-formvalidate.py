@@ -19,20 +19,21 @@ def formval():
 
     if request.method == 'POST':
 
-        #SIMPLE TEXT BOX
-        name1=request.values.getlist("max3sel")
-        print('Multiple (max3) select is :'+str(name1))
+        # SIMPLE TEXT BOX
+        name1 = request.values.getlist("max3sel")
+        print(f'Multiple (max3) select is : {str(name1)}')
         for items in name1:
-            print('Multiple (max3) select item is :'+(items))
+            print(f'Multiple (max3) select item is : {items}')
         
   
         m2agree=request.values.get("agree")
-        print('Checkbox agree is :'+str(m2agree))          
+        print(f'Checkbox agree is : {str(m2agree)}')
         if request.form.get('agree'):
             print('So you have agreed!')   
 
     return render_template('formvalidate.html')
 
+
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    app.secret_key = 'secret123'
     app.run(debug=True)

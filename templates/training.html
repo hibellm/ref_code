@@ -1,0 +1,32 @@
+{% extends 'sui_menu_sidebar.html' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+  <h1>Training on Offer</h1>
+</div>
+
+
+<div class="ui {{ train | count | num2word}} cards">
+
+  {% for t in train %}
+  <div class="ui card">
+    <div class="content">
+      <div class="center aligned large header">{{t['title']}}</div>
+        <div class="center aligned">
+          <i class="ui icon massive {{t['icon']}} circular {{t['color']}} inverted centered"></i>
+        </div>
+      <div class="center aligned description"><p>{{t['description'] | safe}}</p></div>
+    </div>
+    <div class="extra content">
+      <div class="center aligned">
+        <a class="ui label green" href="{{t['register']| safe}}" target="_blank"><i class="pen fancy icon"></i>Register</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+{% endblock %}

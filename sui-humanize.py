@@ -17,7 +17,7 @@ import humanize
 app = Flask(__name__)
 
 
-#SOME DATES AND SIZES TO DEMO
+# SOME DATES AND SIZES TO DEMO
 mjhdt = os.path.getmtime('sui-accordion.py')
 mjhsz = os.path.getsize('sui-tags.py')
 
@@ -25,6 +25,7 @@ mjhsz = os.path.getsize('sui-tags.py')
 @app.template_filter('size_fmt')
 def size_fmt(size):
     return humanize.naturalsize(size)
+
 
 @app.template_filter('humanize')
 def time_humanize(timestamp):
@@ -34,8 +35,9 @@ def time_humanize(timestamp):
 
 @app.route('/')
 def index():
-    return render_template('humanize.html',mjhdt=mjhdt,mjhsz=mjhsz)
+    return render_template('humanize.html', mjhdt=mjhdt, mjhsz=mjhsz)
+
 
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    app.secret_key = 'secret123'
     app.run(debug=True)

@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>About the R&U FlaskApp</h1>
+  <p class="lead">This application is built on the Python Flask framework and is the focus for the "Python Flask From Scratch" YouTube series</p>
+</div>
+
+
+<div class="ui calendar" id="eventdates_calendar">
+  <div class="ui input left icon">
+    <i class="calendar icon"></i>
+    <input type="text" placeholder="Date/Time">
+  </div>
+</div>
+
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%234285F4&amp;ctz=Europe%2FLondon&amp;src=bWFyY3VzLm1qaEBnbWFpbC5jb20&amp;src=c2FwMWhsZmI1M2ZrMWxtamhiMjRhZTZzZHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW5nY2hfNjE0Nl8lNGRpZGRsZXNicm91Z2gjc3BvcnRzQGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23039BE5&amp;color=%23D50000&amp;color=%23616161&amp;showNav=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showTitle=0&amp;showDate=1" style="border:solid 1px #777" width="400" height="300" frameborder="0" scrolling="no"></iframe>
+{% endblock %}

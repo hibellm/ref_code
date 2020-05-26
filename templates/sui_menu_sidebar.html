@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ref-code Testing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.4/dist/semantic.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    {#<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/slider.css') }}"> -->#}
+  </head>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--FOR THE SLIDERMENU  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.4/dist/semantic.min.js"></script>
+
+    <!--FOR MARKDOWN-->
+    <link rel="import" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/build/zero-md.html">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/markdown-themes/default.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/zerodevx/zero-md/v0.2.0/highlight-themes/default.css">
+
+    <script src="static/js/tablesort.js"></script>
+
+    <!-- <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script> -->
+    <!--script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script-->
+    <!-- <script type="text/javascript">
+      CKEDITOR.replace('editor')
+    </script> -->
+
+    <script>
+      $('.menu .item').tab();
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('#sbslide').first().sidebar('attach events', '#menutog').sidebar('setting', 'transition', 'overlay');
+        $('#menutog').removeClass('disabled');
+
+        $('.popup').popup();
+        $('.ui.dropdown').dropdown();
+      });
+    </script>
+  <style>
+    .ui.sidebar {
+    overflow: visible !important;
+}
+  </style>
+<body>
+
+  <!--  SIDEBAR MENU-->
+  <div class="ui inverted labeled icon left inline vertical sidebar menu" id="sbslide">
+    <a class="item"><i class="ui icon dragon red large"></i></a>
+        <div class="item">
+          <div class="ui input"><input type="text" placeholder="Search..."></div>
+        </div>
+      <a class="item"><div class="middle aligned content"><i class="ui icon home large"></i>Home</div></a>
+      <a class="item"><div class="middle aligned content"><i class="ui icon block layout large"></i>Topics</div></a>
+      <a class="item"><div class="middle aligned content"><i class="smile icon large"></i>Friends</div></a>
+      <a class="item"><div class="middle aligned content"><i class="calendar icon large"></i>History</div></a>
+
+    <div class="ui simple dropdown item red">Dropdown<i class="dropdown icon"></i>
+      <div class="ui menu inverted">
+        <div class="item">Choice 1</div>
+        <div class="item">Choice 2</div>
+        <div class="item">Choice 3</div>
+      </div>
+    </div>
+
+    <a class="item" href="/events"><div class="middle aligned content"><i class="linkify icon large"></i>Links</div></a>
+    <a class="item" href="/training"><div class="middle aligned content"><i class="landmark icon large"></i>Trainings</div></a>
+
+      <!--BOTTOM MENU TO SIDEBAR-->
+      <div class="ui bottom fixed menu inverted padded" >
+        <a class="item"><i class="book icon"></i>bottom</a>
+        <a class="item"><i class="icon mail"></i> Messages<div class="right floating ui red label">22</div></a>
+        <a class="item"><i class="calendar icon"></i>events</a>
+
+      </div>
+  </div>
+  <!--  TOP MENU-->
+  <div class="ui top fixed menu inverted" >
+    <a class="item"><i class="ui icon dragon red large"></i></a>
+    <a class="item" id="menutog"><i class="sidebar icon"></i>Menu</a>
+    <a class="item"><h3>Semantic-UI</h3></a>
+    <a class="item"><i class="ui icon chart bar"></i>Metrics</a>
+    <a class="item"><i class="ui icon calendar"></i>Jira</a>
+    <a class="item"><i class="ui icon chart line"></i>Charts</a>
+    <a class="item" href="/delivery"><i class="ui icon truck"></i>Deliveries</a>
+
+    <!--DROPDOWN FILE MENU-->
+    <a class="item">
+    <div class="ui dropdown">
+      <div class="text">File</div>
+      <i class="dropdown icon"></i>
+      <div class="menu inverted">
+        <div class="item">New</div>
+        <div class="item"><i class="file icon"></i><span class="description">ctrl + o</span>Open...</div>
+        <div class="item"><i class="save icon"></i><span class="description">ctrl + s</span>Save as...</div>
+        <div class="item"><span class="description">ctrl + r</span>Rename</div>
+        <div class="item"><i class="copy icon"></i>Make a copy</div>
+        <div class="item"><i class="folder icon"></i>Move to folder</div>
+        <div class="item"><i class="trash icon"></i>Move to trash</div>
+        <div class="divider"></div>
+        <div class="item"><i class="download icon"></i>Download As...</div>
+        <div class="item">
+          <i class="icons">
+            <i class="globe icon"></i><i class="mini share icon left bottom corner"></i>
+          </i>
+          Publish To Web
+          <div class="menu">
+            <div class="item"><i class="google icon"></i>Google Docs</div>
+            <div class="item"><i class="google drive icon"></i>Google Drive</div>
+            <div class="item"><i class="dropbox icon"></i>Dropbox</div>
+            <div class="item"><i class="adobe icon"></i>Adobe Creative Cloud</div>
+            <div class="item"><i class="folder open icon"></i>Private FTP</div>
+            <div class="item"><i class="folder open icon"></i>Another Service...</div>
+          </div>
+        </div>
+        <div class="item"><i class="mail icon"></i>E-mail Collaborators</div>
+      </div>
+    </div>
+</a>
+
+    <a class="item right" href="/about"><i class="ui icon question"></i>About</a>
+
+    <div class="ui borderless menu inverted">
+      <div class="ui simple dropdown item">Jira<i class="ui icon jira"></i>
+        <div class="menu">
+            <div class="ui labeled button fluid" tabindex="0">
+              <div class="ui button fluid"><i class="ui icon tasks"></i> Open</div>
+              <a class="ui basic green left pointing label">   12</a>
+            </div>
+            <div class="ui labeled button fluid" tabindex="1">
+              <div class="ui button fluid"><i class="ui icon list"></i> Closed</div>
+              <a class="ui basic red left pointing label">1,048</a>
+            </div>
+            <div class="ui labeled left button fluid" tabindex="1">
+              <div class="ui button fluid"><i class="ui icon cogs"></i> In Progress</div>
+              <a class="ui basic yellow left pointing label">   48</a>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui borderless menu inverted">
+      <div class="ui simple dropdown item">System<i class="ui icon"></i>
+        <div class="menu">
+          <a class="item"><i class="icon power on {% if jira %} green {% else %} red {% endif %}"></i>Jira</a>
+          <a class="item"><i class="icon power on {% if gmail %} green {% else %} red {% endif %}"></i>Gmail</a>
+          <a class="item"><i class="icon power on {% if box %} green {% else %} red {% endif %}"></i>Box</a>
+        </div>
+      </div>
+    </div>
+
+
+    <a class="item right">Register</a>
+    <a class="item "><i class="ui icon sign in"></i>login</a>
+  </div>
+
+
+
+  <div style="padding-top:60px"></div>
+  <div class="pusher container fluid" style="padding-top:10px">
+    {% block body %}
+    {% endblock %}
+  </div>
+
+  </body>
+</html>

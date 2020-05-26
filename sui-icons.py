@@ -37,8 +37,8 @@ def icons():
     a=__name__
     b=__file__
     
-    return render_template('icons.html',**locals())
+    return render_template('icons.html', **locals())
 
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    app.secret_key = 'secret123'
     app.run(debug=True)
