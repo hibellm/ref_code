@@ -1,0 +1,45 @@
+{% extends 'sui_menu_sidebar.html' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+  <h1>Training on Offer</h1>
+</div>
+
+ <!--JIRA TABLE-->
+  <table class="ui table very basic sortable compact display" id="checktable">
+      <thead>
+        <th>JIRA Code</th>
+        <th>Document Check List</th>
+        <th>File Path</th>
+        <th>File HashID</th>
+      </thead>
+      {% for chk in chkfiles %}
+      <tr>
+        <td><a href="http://www.bbc.co.uk" target='_blank'>{{ chk.jirakey }}</a></td>
+        <td class="left aligned">
+          {% if chk.filecat == 'zip' %}
+          <div class="ui teal button" data-title="{{chk.filehash}}" data-content="{{chk.filehash}}">{{chk.filename}}</div>
+          {% endif %}
+          <div class="ui accordion">
+              {% if chk.filecat == 'zip' %}
+                <div class="title">
+                  <i class="dropdown icon"></i>{{chk.filename}}
+                </div>
+              {% endif %}
+            <div class="content">
+                <i class="ui icon large {{chk.filename.split('.')[-1] | icon_fmt_ext}} "></i>
+                {% if chk.filecat != 'zip' %}
+                  {{chk.filename}} - {{chk.filedescription}}
+                {% endif %}
+            </div>
+          </div>
+        </td>
+        <td>{{ chk.pathtofile }}</td>
+        <td><div class="ui light-grey horizontal label mono">{{ chk.filehash }}</div></td>
+      </tr>
+      {% endfor %}
+    </table>
+
+
+{% endblock %}

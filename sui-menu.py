@@ -28,7 +28,10 @@ app = Flask(__name__)
 client = MongoClient('localhost', 27017)    # Configure the connection to the database
 dsidb = client.dsi    # Select the database
 dsitrain = dsidb.train
+dsidict = dsidb.dictionary
 
+
+icontypes = list(dsidict.find({"_id": ObjectId("5ecd90ece71a93e15c647768")}))
 
 def pingOk(sHost):
     try:
@@ -45,6 +48,16 @@ def num2word(num):
         return 'four'
     else:
         return str(x[str(num % 4)])
+
+@app.template_filter('icon_fmt_ext')
+def icon_fmt_ext(filename):
+    i = 'history'#DEFAULT
+    for icon, exts in icontypes.items():
+        if filename in exts:
+            i = icon
+    return i
+
+
 
 @app.route('/menu')
 def menu():
@@ -72,6 +85,11 @@ def events():
 @app.route('/delivery')
 def delivery():
     return render_template('about.html')
+
+
+@app.route('/jira')
+def jira():
+    return render_template('jira.html')
 
 
 @app.route('/training')
