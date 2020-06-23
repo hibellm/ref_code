@@ -36,5 +36,5 @@ def page_not_found(error):
 
 if __name__ == '__main__':
     app.secret_key = 'secret123'
-    app.run('0.0.0.0', 8000, threaded=True, debug=True)
+    app.run(port= 8000, threaded=True, debug=True)
 
