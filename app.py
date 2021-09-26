@@ -31,10 +31,11 @@ def markdown():
 # ERROR HANDLING
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('page_not_found.html'), 404
+    msg = f"why cant I find the page you want - report sent to admins"
+    return render_template('page_not_found.html', msg=msg), 404
 
 
 if __name__ == '__main__':
     app.secret_key = 'secret123'
-    app.run(port= 8000, threaded=True, debug=True)
+    app.run(port=8000, threaded=True, debug=True)
 

@@ -171,7 +171,7 @@ with open("data.yml", 'r') as stream:
     todoproc = yaml.safe_load(stream)
 
 
-with open("configtest.yml", 'r') as stream:
+with open("./ref_code/configtest.yml", 'r') as stream:
     configtest = yaml.safe_load(stream)
 
 
@@ -179,8 +179,8 @@ if configtest['withdl']:
     print('Going to load data')
 if configtest['makecsv']:
     print('Going to make csv files')
-if configtest['logname']:
-    print(f"Going to make log file as {configtest['logname']}")
+if configtest['log']['logname']:
+    print(f"Going to make log file as {configtest['log']['logname']}")
 
 ######################
 # TESTING SCHEMA VALIDATION
@@ -209,3 +209,73 @@ print(f"valid? {schema.is_valid(data)}")
 
 
 
+# Get the service resource
+sqs = boto3.resource('sqs')
+
+# Get the queue. This returns an SQS.Queue instance
+queue = sqs.get_queue_by_name(QueueName='test')
+
+
+
+# Create a new message
+response = queue.send_message(MessageBody='world')
+
+# The response is NOT a resource, but gives you a message ID and MD5
+print(response.get('MessageId'))
+print(response.get('MD5OfMessageBody'))
+
+
+queue.send_message(MessageBody='boto3', MessageAttributes={
+    'Author': {
+        'StringValue': 'Daniel',
+        'DataType': 'String'
+    }
+})
+
+# Process messages by printing out body and optional author name
+for message in queue.receive_messages(MessageAttributeNames=['Author']):
+    # Get the custom author message attribute if it was set
+    author_text = ''
+    if message.message_attributes is not None:
+        author_name = message.message_attributes.get('Author').get('StringValue')
+        if author_name:
+            author_text = ' ({0})'.format(author_name)
+
+    # Print out the body and author (if set)
+    print('Hello, {0}!{1}'.format(message.body, author_text))
+
+    
+    # Let the queue know that the message is processed
+    message.delete()
+
+
+import boto3
+
+# Create SQS client
+sqs = boto3.client('sqs')
+
+queue_url = 'SQS_QUEUE_URL'
+
+# Receive message from SQS queue
+response = sqs.receive_message(
+    QueueUrl=queue_url,
+    AttributeNames=[
+        'SentTimestamp'
+    ],
+    MaxNumberOfMessages=1,
+    MessageAttributeNames=[
+        'All'
+    ],
+    VisibilityTimeout=0,
+    WaitTimeSeconds=0
+)
+
+message = response['Messages'][0]
+receipt_handle = message['ReceiptHandle']
+
+# Delete received message from queue
+sqs.delete_message(
+    QueueUrl=queue_url,
+    ReceiptHandle=receipt_handle
+)
+print('Received and deleted message: %s' % message)

@@ -18,8 +18,8 @@ app = Flask(__name__)
 
 
 # SOME DATES AND SIZES TO DEMO
-mjhdt = os.path.getmtime('sui-accordion.py')
-mjhsz = os.path.getsize('sui-tags.py')
+mjhdt = os.path.getmtime('./ref_code/sui-accordion.py')
+mjhsz = os.path.getsize('./ref_code/sui-tags.py')
 
 
 @app.template_filter('size_fmt')

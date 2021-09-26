@@ -11,7 +11,7 @@ DESCRIPTION: Testing Pyreadstat module
 import pyreadstat
 
 
-df, meta = pyreadstat.read_sas7bdat('/static/data/mammals.sas7bdat')
+df, meta = pyreadstat.read_sas7bdat('./ref_code/static/data/mammals.sas7bdat')
 
 # done! let's see what we got
 print(df.head())

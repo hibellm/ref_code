@@ -17,7 +17,7 @@ from datetime import datetime, date, time
 app = Flask(__name__)
 
 
-@app.route('/anon', methods=['GET','POST'])
+@app.route('/anon', methods=['GET', 'POST'])
 def anon():           
 
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def anon():
         anontype=request.values.get("anontype")
         print('AnonType is :'+str(anontype))
         schema=request.values.get("schema")
-        print('Schema type is :'+str(schema))  #you get 'on' if you dont have a values in teh html part
+        print('Schema type is :'+str(schema))  #you get 'on' if you dont have a values in the html part
 
         name7=request.values.get("cbox")
         print('CheckBox is :'+str(name7))        
@@ -73,6 +73,8 @@ def anon():
 
         print(f'This is my example call\n')
         print(f"demo_anonymization('{name3a}',{name10},'{schema}','{anontype}',{bool(withdl)},{bool(makedel)})")
+
+
 
         return redirect(url_for('anon'))
     

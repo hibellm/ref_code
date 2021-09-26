@@ -17,6 +17,9 @@
   Scheduler/Flask app running?
   <div class="ui label">{{sensor}}</div>
   <hr>
+  {% for tp in timep %}
+  <div class="ui label">{{tp}}</div>
+  {% endfor %}
 </div>
 
 {% endblock %}
